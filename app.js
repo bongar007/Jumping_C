@@ -14,13 +14,18 @@ const app = express();
 require("./config/passport")(passport);
 
 // DB Config
-const db = require("./config/keys").mongoURI;
+const db = mongoose.connection;
 
 // Connect to MongoDB
-mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("MongoDb Connected"));
+// .then(() => console.log("MongoDB Connected"))
+// .catch((err) => console.log(err));
 
 // EJS
 app.use(expressLayouts);
