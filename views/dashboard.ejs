@@ -2,62 +2,53 @@
 <p class="lead mb-3">Welcome <%= user.name %></p>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 
-<script>
-  let font,
-    fontsize = 32;
-
-  function preload() {
-    // Ensure the .ttf or .otf font stored in the assets directory
-    // is loaded before setup() and draw() are called
-    font = loadFont("../assets/fonts/Montserrat-Regular.ttf");
-  }
-
-  function setup() {
-    createCanvas(710, 400);
-
-    // Set text characteristics
-    textFont(font);
-    textSize(fontsize);
-    textAlign(CENTER, CENTER);
-  }
-
-  function draw() {
-    background(160);
-
-    // Set the gap between letters and the left and top margin
-    let gap = 52;
-    let margin = 10;
-    translate(margin * 4, margin * 4);
-
-    // Set the counter to start at the character you want
-    // in this case 35, which is the # symbol
-    let counter = 35;
-
-    // Loop as long as there is space on the canvas
-    for (let y = 0; y < height - gap; y += gap) {
-      for (let x = 0; x < width - gap; x += gap) {
-        // Use the counter to retrieve individual letters by their Unicode number
-        let letter = char(counter);
-
-        // Add different color to the vowels and other characters
-        if (
-          letter === "A" ||
-          letter === "E" ||
-          letter === "I" ||
-          letter === "O" ||
-          letter === "U"
-        ) {
-          fill("#ed225d");
-        } else {
-          fill(255);
-        }
-
-        // Draw the letter to the screen
-        text(letter, x, y);
-
-        // Increment the counter
-        counter++;
+<div id="canvas-container" class="container">
+  <script>
+    let fontsize = 12;
+    let cnv;
+    class Zero {
+      constructor(x, y, r, h) {
+        this.x = x + 5;
+        this.y = y - 5;
+        //WORK ON RADIUS!!!!!!!
+        this.r = r;
+        this.h = h;
+      }
+      show() {
+        stroke(255);
+        noFill();
+        strokeWeight(1);
+        //FIX THIS WITH AFTER RADIUS FIX
+        ellipse(this.x, this.y, this.r * 2, this.h);
       }
     }
-  }
-</script>
+
+    function centerCanvas() {
+      let x = (windowWidth - width) / 2;
+      let y = (windowHeight - height) / 2;
+      cnv.position(x, y);
+    }
+
+    function setup() {
+      cnv = createCanvas(500, 500);
+      centerCanvas();
+      cnv.parent("canvas-container");
+    }
+
+    function windowResized() {
+      centerCanvas();
+    }
+
+    function draw() {
+      background(0);
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          let wdt = x + 12 * x;
+          let hgt = y + 13 * y;
+          let zero = new Zero(wdt, hgt, 3, 10);
+          zero.show();
+        }
+      }
+    }
+  </script>
+</div>
