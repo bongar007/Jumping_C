@@ -4,24 +4,9 @@
 
 <div id="canvas-container" class="container">
   <script>
-    let fontsize = 12;
     let cnv;
-    class Zero {
-      constructor(x, y, r, h) {
-        this.x = x + 5;
-        this.y = y - 5;
-        //WORK ON RADIUS!!!!!!!
-        this.r = r;
-        this.h = h;
-      }
-      show() {
-        stroke(255);
-        noFill();
-        strokeWeight(1);
-        //FIX THIS WITH AFTER RADIUS FIX
-        ellipse(this.x, this.y, this.r * 2, this.h);
-      }
-    }
+    let grid = [];
+    const canvasSize = 500;
 
     function centerCanvas() {
       let x = (windowWidth - width) / 2;
@@ -29,26 +14,82 @@
       cnv.position(x, y);
     }
 
-    function setup() {
-      cnv = createCanvas(500, 500);
-      centerCanvas();
-      cnv.parent("canvas-container");
-    }
-
     function windowResized() {
       centerCanvas();
     }
 
-    function draw() {
-      background(0);
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          let wdt = x + 12 * x;
-          let hgt = y + 13 * y;
-          let zero = new Zero(wdt, hgt, 3, 10);
-          zero.show();
+    function generateGrid(size) {
+      let grid = [];
+      const randomPlaceX = Math.floor(Math.random() * 24);
+      const randomPlaceY = Math.floor(Math.random() * 24);
+      for (let x = 0; x < size; x++) {
+        let row = [];
+        for (let y = 0; y < size; y++) {
+          row.push("");
         }
+        grid.push(row);
       }
+      grid[randomPlaceX][randomPlaceY] = "C";
+
+      return grid;
+    }
+    ///Id like to return an array or object of randomPLacex, randomPLaceY and grid from above function, decunstruct it into 3 variables and use them in the function below and elsewere. Id like to replace the past "C" with the newly generated "C", hence trying to store their previous locations. I am unable to read the values  after they are returned. Why? Please help!! :)
+    function deleteC(grid) {
+      grid[randomPlaceX][randomPlaceY] = "";
+    }
+
+    function locateO(event) {
+      const tileSize = canvasSize / grid.length;
+      const { layerX, layerY } = event;
+
+      const x = Math.floor(layerX / tileSize);
+      console.log("locateO x", x);
+      const y = Math.floor(layerY / tileSize);
+      console.log("locateO y", y);
+
+      grid[x][y] = {};
+
+      // redraw();
+    }
+
+    function createZero(x, y) {
+      const tileSize = canvasSize / grid.length;
+      stroke(255);
+      noFill();
+      strokeWeight(2);
+      ellipse(x * tileSize + 10, y * tileSize + 10, 12, 16);
+    }
+
+    function drawGrid(grid) {
+      const tileSize = canvasSize / grid.length;
+
+      grid.forEach((row, x) => {
+        row.forEach((element, y) => {
+          if (element !== "C") {
+            createZero(x, y);
+          } else {
+            stroke(255);
+            fill(255);
+            ellipse(x * tileSize + 10, y * tileSize + 10, 12, 16);
+          }
+        });
+      });
+    }
+
+    function setup() {
+      cnv = createCanvas(canvasSize, canvasSize);
+      centerCanvas();
+      background(0);
+      cnv.parent("canvas-container");
+      setInterval(() => {
+        grid = generateGrid(25);
+      }, 500);
+      setInterval(deleteC(grid), 600);
+      cnv.mouseClicked(locateO);
+    }
+
+    function draw() {
+      drawGrid(grid);
     }
   </script>
 </div>
