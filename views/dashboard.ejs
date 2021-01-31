@@ -5,7 +5,7 @@
 <div id="canvas-container" class="container">
   <script>
     let cnv;
-    let grid = [];
+    // let grid = [];
     const canvasSize = 500;
 
     function centerCanvas() {
@@ -31,10 +31,12 @@
       }
       grid[randomPlaceX][randomPlaceY] = "C";
 
-      return grid;
+      return [randomPlaceX, randomPlaceY, grid];
     }
-    ///Id like to return an array or object of randomPLacex, randomPLaceY and grid from above function, decunstruct it into 3 variables and use them in the function below and elsewere. Id like to replace the past "C" with the newly generated "C", hence trying to store their previous locations. I am unable to read the values  after they are returned. Why? Please help!! :)
-    function deleteC(grid) {
+    let [randomPlaceX, randomPlaceY, grid] = generateGrid(25); //<---- Not returning the right values
+    // console.log(randomPlaceX, randomPlaceY, grid);
+    ///Id like to return an array or object of randomPLacex, randomPLaceY and grid from above function, decunstruct it into 3 variables and use them in the function below and elsewere. Id like to replace the past "C" with the newly generated "C", hence trying to store their previous locations. I am unable to read the values  after they are returned. Grid becomes  'undefined' Why? Please help!! :)
+    function deleteC(grid, randomPlaceX, randomPlaceY) {
       grid[randomPlaceX][randomPlaceY] = "";
     }
 
@@ -81,10 +83,8 @@
       centerCanvas();
       background(0);
       cnv.parent("canvas-container");
-      setInterval(() => {
-        grid = generateGrid(25);
-      }, 500);
-      setInterval(deleteC(grid), 600);
+      setInterval(generateGrid(25), 2000);
+      setInterval(deleteC(grid, randomPlaceX, randomPlaceY), 2500);
       cnv.mouseClicked(locateO);
     }
 
