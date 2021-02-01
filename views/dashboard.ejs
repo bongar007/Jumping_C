@@ -3,9 +3,13 @@
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 
 <div id="canvas-container" class="container">
+  <progress value="0" max="10" id="progressBar"></progress>
   <script>
     let cnv;
-    // let grid = [];
+    let generatedGrid = [];
+    let readyElement;
+    let counter = 30;
+    const announcer = document.querySelector("#announcer");
     const canvasSize = 500;
 
     function centerCanvas() {
@@ -18,30 +22,23 @@
       centerCanvas();
     }
 
-    function generateGrid(size) {
+    function generateGrid() {
       let grid = [];
       const randomPlaceX = Math.floor(Math.random() * 24);
       const randomPlaceY = Math.floor(Math.random() * 24);
-      for (let x = 0; x < size; x++) {
+      for (let x = 0; x < 25; x++) {
         let row = [];
-        for (let y = 0; y < size; y++) {
+        for (let y = 0; y < 25; y++) {
           row.push("");
         }
         grid.push(row);
       }
       grid[randomPlaceX][randomPlaceY] = "C";
-
-      return [randomPlaceX, randomPlaceY, grid];
-    }
-    let [randomPlaceX, randomPlaceY, grid] = generateGrid(25); //<---- Not returning the right values
-    // console.log(randomPlaceX, randomPlaceY, grid);
-    ///Id like to return an array or object of randomPLacex, randomPLaceY and grid from above function, decunstruct it into 3 variables and use them in the function below and elsewere. Id like to replace the past "C" with the newly generated "C", hence trying to store their previous locations. I am unable to read the values  after they are returned. Grid becomes  'undefined' Why? Please help!! :)
-    function deleteC(grid, randomPlaceX, randomPlaceY) {
-      grid[randomPlaceX][randomPlaceY] = "";
+      return grid;
     }
 
     function locateO(event) {
-      const tileSize = canvasSize / grid.length;
+      const tileSize = canvasSize / generatedGrid.length;
       const { layerX, layerY } = event;
 
       const x = Math.floor(layerX / tileSize);
@@ -49,20 +46,21 @@
       const y = Math.floor(layerY / tileSize);
       console.log("locateO y", y);
 
-      grid[x][y] = {};
+      generatedGrid[x][y] = {};
 
       // redraw();
     }
 
     function createZero(x, y) {
-      const tileSize = canvasSize / grid.length;
+      const tileSize = canvasSize / generatedGrid.length;
+
       stroke(255);
       noFill();
       strokeWeight(2);
       ellipse(x * tileSize + 10, y * tileSize + 10, 12, 16);
     }
 
-    function drawGrid(grid) {
+    function drawZeros(grid) {
       const tileSize = canvasSize / grid.length;
 
       grid.forEach((row, x) => {
@@ -78,18 +76,53 @@
       });
     }
 
+    let timeleft = 10;
+    function timer(el) {
+      const downloadTimer = setInterval(function () {
+        if (timeleft <= 0) {
+          clearInterval(downloadTimer);
+          noLoop();
+          cnv.addClass("hide");
+          readyElement.removeClass("hide").addClass("show").html("Game Over!!");
+        }
+        document.getElementById("progressBar").value = 10 - timeleft;
+        timeleft -= 1;
+      }, 1000);
+    }
+
     function setup() {
       cnv = createCanvas(canvasSize, canvasSize);
       centerCanvas();
-      background(0);
       cnv.parent("canvas-container");
-      setInterval(generateGrid(25), 2000);
-      setInterval(deleteC(grid, randomPlaceX, randomPlaceY), 2500);
+      readyElement = createElement("h1", "READY???");
+      readyElement.addClass("show");
+      setTimeout(() => {
+        readyElement.removeClass("show").addClass("hide");
+      }, 2000);
+      timer(readyElement);
       cnv.mouseClicked(locateO);
+      frameRate(0.5);
     }
 
     function draw() {
-      drawGrid(grid);
+      createCanvas(canvasSize, canvasSize);
+      background(0);
+      generatedGrid = generateGrid();
+      drawZeros(generatedGrid);
     }
   </script>
+  <style>
+    .show {
+      position: absolute;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    .hide {
+      display: none;
+    }
+  </style>
 </div>
