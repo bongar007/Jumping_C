@@ -10,6 +10,12 @@ const session = require("express-session");
 
 const app = express();
 
+//Setting Static files
+app.use(express.static("public"));
+app.use("/css", express.static(__dirname + "public/css"));
+app.use("/js", express.static(__dirname + "public/js"));
+app.use("/assets", express.static(__dirname + "public/assets"));
+
 // Passport Config
 require("./config/passport")(passport);
 
@@ -24,8 +30,6 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("MongoDb Connected"));
-// .then(() => console.log("MongoDB Connected"))
-// .catch((err) => console.log(err));
 
 // EJS
 app.use(expressLayouts);

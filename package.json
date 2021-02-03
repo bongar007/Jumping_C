@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "devStart": "nodemon app.js"
+    "devStart": "nodemon app.js",
+    "build": "browserify game.js -o bundle.js"
   },
   "engines": {
     "node": "14.15.1",
@@ -29,6 +30,10 @@
     "nedb": "^1.8.0",
     "p5": "^1.2.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "zl-fetch": "^3.2.3"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0"
   }
 }

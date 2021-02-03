@@ -94,4 +94,11 @@ router.get("/logout", (req, res) => {
   res.redirect("/users/login");
 });
 
+router.post("/dashboard", (req, res) => {
+  console.log(`I got a request to save HighScore`);
+  let highScore = req.body.highScore;
+  highScore.save();
+  res.end();
+});
+
 module.exports = router;
