@@ -94,11 +94,20 @@ router.get("/logout", (req, res) => {
   res.redirect("/users/login");
 });
 
-router.post("/dashboard", (req, res) => {
+//Updating HighScore
+router.post("/api", (req, res) => {
   console.log(`I got a request to save HighScore`);
-  let highScore = req.body.highScore;
-  highScore.save();
-  res.end();
+  console.log(req.body);
+  const data = req.body.highScore;
+  console.log(data);
+  // if (highScore) {
+  //   user.save({ highScore: highScore });
+  // } else {
+  res.send({
+    status: "success",
+    highScore: data,
+  });
+  // }
 });
 
 module.exports = router;

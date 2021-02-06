@@ -1,5 +1,3 @@
-const zlFetch = require("zl-fetch");
-const p5 = require("p5");
 let cnv;
 let generatedGrid = [];
 let readyElement;
@@ -87,17 +85,25 @@ function timer(el) {
     if (timeleft <= 0) {
       clearInterval(downloadTimer);
       highScore = currentScoreEl.textContent;
-      console.log(highScore);
+
       highScoreEl.textContent = `Your best score is ${highScore}`;
-      if (highScore < currentScoreEl.textContent) {
-        let content = { highScore: highScore };
 
-        zlFetch("/dashboard", {
-          method: "post",
-          body: content,
-        }).than((response) => console.log(response));
-      }
+      let content = { highScore: highScore };
+      console.log(content);
+      let options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(content),
+      };
+      const sendingHighScore = async function () {
+        const response = await fetch("/users/api", options);
+        const data = await response.json();
+        console.log(data);
+      };
 
+      sendingHighScore();
       noLoop();
       cnv.addClass("hide");
       readyElement.removeClass("hide").addClass("show").html("Game Over!!");

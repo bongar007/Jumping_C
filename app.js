@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.set("view engine", "ejs");
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Express session
 app.use(
