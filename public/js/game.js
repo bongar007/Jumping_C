@@ -124,7 +124,6 @@ function setup() {
     readyElement.removeClass("show").addClass("hide");
   }, 2000);
   timer(readyElement);
-  // scoreObserver();
   cnv.mouseClicked(locateC);
 
   frameRate(0.5);

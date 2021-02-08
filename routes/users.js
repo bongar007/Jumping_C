@@ -3,7 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 // Load User model
-const User = require("../models/User");
+const User = require("../models/User").User;
+const generateToken = require("../models/User").generateToken;
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
@@ -61,6 +62,10 @@ router.post("/register", (req, res) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
             newUser.password = hash;
+            newUser.populate("token");
+            if (newUser.token == null) newUser.generateToken();
+            req.user = user;
+
             newUser
               .save()
               .then((user) => {
@@ -76,6 +81,18 @@ router.post("/register", (req, res) => {
       }
     });
   }
+});
+
+//Get token
+
+router.get("/users/getToken", function (req, res) {
+  User.findOne({ _id: req.user._id })
+    .populate("token")
+    .exec(function (err, user) {
+      if (user.token == null) user.generateToken();
+      req.user = user;
+      res.json({ user: user, token: token });
+    });
 });
 
 // Login
@@ -95,19 +112,22 @@ router.get("/logout", (req, res) => {
 });
 
 //Updating HighScore
+
 router.post("/api", (req, res) => {
   console.log(`I got a request to save HighScore`);
-  console.log(req.body);
   const data = req.body.highScore;
   console.log(data);
-  // if (highScore) {
-  //   user.save({ highScore: highScore });
-  // } else {
-  res.send({
+  User.findByIdAndUpdate(req.user._id, { highScore: data }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log({ "Updated User": docs });
+    }
+  });
+  res.json({
     status: "success",
     highScore: data,
   });
-  // }
 });
 
 module.exports = router;

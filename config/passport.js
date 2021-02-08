@@ -1,10 +1,11 @@
 const LocalStrategy = require("passport-local").Strategy;
+const BearerStrategy = require("passport-http-bearer").Strategy;
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 // Load User model
-const User = require("../models/User");
-
+const Models = require("../models/User");
+const { User, Token } = Models;
 module.exports = function (passport) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
@@ -26,6 +27,17 @@ module.exports = function (passport) {
           }
         });
       });
+    })
+  );
+
+  passport.use(
+    new BearerStrategy({}, function (token, done) {
+      Token.findOne({ value: token })
+        .populate("user")
+        .exec(function (err, token) {
+          if (!token) return done(null, false);
+          return done(null, token.user);
+        });
     })
   );
 

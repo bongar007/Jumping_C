@@ -27,6 +27,8 @@ const db = mongoose.connection;
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 db.on("error", (error) => console.error(error));
@@ -43,9 +45,9 @@ app.use(bodyParser.json());
 // Express session
 app.use(
   session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
