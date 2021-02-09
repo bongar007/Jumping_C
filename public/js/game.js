@@ -1,10 +1,10 @@
 let cnv;
 let generatedGrid = [];
 let readyElement;
-let counter = 30;
+// let counter = 30;
 let score = 0;
 let highScore = 0;
-let timeleft = 10;
+// let timeleft = 10;
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
 const canvasSize = 500;
@@ -81,15 +81,20 @@ function drawZeros(grid) {
 
 //Adding a count down to create an "end of game" scenario, displayed by a progress-bar
 function timer(el) {
+  let current_progress = 0;
   const downloadTimer = setInterval(function () {
-    if (timeleft <= 0) {
+    current_progress += 1;
+    const progressBar = document.getElementById("dynamic");
+    progressBar.style.width = `${current_progress * 10}%`;
+    progressBar.setAttribute("aria-valuenow", current_progress);
+    progressBar.textContent = `${10 - current_progress}`;
+    if (current_progress >= 10) {
       clearInterval(downloadTimer);
       highScore = currentScoreEl.textContent;
 
       highScoreEl.textContent = `Your best score is ${highScore}`;
 
       let content = { highScore: highScore };
-      console.log(content);
       let options = {
         method: "POST",
         headers: {
@@ -102,15 +107,42 @@ function timer(el) {
         const data = await response.json();
         console.log(data);
       };
-
       sendingHighScore();
       noLoop();
       cnv.addClass("hide");
       readyElement.removeClass("hide").addClass("show").html("Game Over!!");
     }
-    document.getElementById("progressBar").value = 10 - timeleft;
-    timeleft -= 1;
   }, 1000);
+
+  // const downloadTimer = setInterval(function () {
+  //   if (timeleft <= 0) {
+  // clearInterval(downloadTimer);
+  // highScore = currentScoreEl.textContent;
+
+  // highScoreEl.textContent = `Your best score is ${highScore}`;
+
+  // let content = { highScore: highScore };
+  // let options = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(content),
+  // };
+  // const sendingHighScore = async function () {
+  //   const response = await fetch("/users/api", options);
+  //   const data = await response.json();
+  //   console.log(data);
+  // };
+
+  //   sendingHighScore();
+  //   noLoop();
+  //   cnv.addClass("hide");
+  //   readyElement.removeClass("hide").addClass("show").html("Game Over!!");
+  // }
+  // document.getElementById("progressBar").value = 10 - timeleft;
+  // timeleft -= 1;
+  // }, 1000);
 }
 //Setup function for P5JS
 function setup() {
