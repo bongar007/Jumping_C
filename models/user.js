@@ -32,12 +32,12 @@ UserSchema.methods.generateToken = function () {
   token.value = randtoken.generate(32);
   token.user = this._id;
   this.token = token._id;
-  this.save(function (err) {
-    if (err) throw err;
-    token.save(function (err) {
-      if (err) throw err;
-    });
-  });
+  // this.save(function (err) {
+  //   if (err) throw err;
+  //   token.save(function (err) {
+  //     if (err) throw err;
+  //   });
+  // });
 };
 
 const User = mongoose.model("User", UserSchema);

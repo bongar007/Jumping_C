@@ -3,6 +3,15 @@ body {
   background: #455a64;
 }
 
+.main-content-wrapper {
+  height: 100%;
+}
+
+.get-ready {
+  position: relative;
+  bottom: 40em;
+}
+
 .show {
   position: absolute;
   display: block;
@@ -16,6 +25,10 @@ body {
   display: none;
 }
 
+.canvas-container {
+  height: 45em;
+}
+
 .high-score {
   color: red;
   font-size: larger;
@@ -23,18 +36,27 @@ body {
 
 .current-score {
   color: white;
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .progress {
-  margin: 10px;
+  margin: 1em;
   width: 100%;
+}
+
+/* Canvas CSS */
+
+.p5Canvas {
+  top: 22em;
 }
 
 /* FOOTER STYLES  */
 
-.container-fluid {
+.footer-wrapper {
   overflow: hidden;
-  margin-top: 250px;
+  margin-top: 2em;
   background: #262626;
   color: #627482 !important;
   margin-bottom: 0;

@@ -113,36 +113,6 @@ function timer(el) {
       readyElement.removeClass("hide").addClass("show").html("Game Over!!");
     }
   }, 1000);
-
-  // const downloadTimer = setInterval(function () {
-  //   if (timeleft <= 0) {
-  // clearInterval(downloadTimer);
-  // highScore = currentScoreEl.textContent;
-
-  // highScoreEl.textContent = `Your best score is ${highScore}`;
-
-  // let content = { highScore: highScore };
-  // let options = {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(content),
-  // };
-  // const sendingHighScore = async function () {
-  //   const response = await fetch("/users/api", options);
-  //   const data = await response.json();
-  //   console.log(data);
-  // };
-
-  //   sendingHighScore();
-  //   noLoop();
-  //   cnv.addClass("hide");
-  //   readyElement.removeClass("hide").addClass("show").html("Game Over!!");
-  // }
-  // document.getElementById("progressBar").value = 10 - timeleft;
-  // timeleft -= 1;
-  // }, 1000);
 }
 //Setup function for P5JS
 function setup() {
@@ -151,7 +121,7 @@ function setup() {
   cnv.parent("canvas-container");
 
   readyElement = createElement("h1", "READY???");
-  readyElement.addClass("show");
+  readyElement.addClass("show get-ready");
   setTimeout(() => {
     readyElement.removeClass("show").addClass("hide");
   }, 2000);
