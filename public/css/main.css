@@ -13,10 +13,10 @@ body {
   height: 50em;
 }
 
-.get-ready {
+/* .get-ready {
   position: relative;
   bottom: 40em;
-}
+} */
 
 .show {
   position: absolute;
@@ -54,6 +54,15 @@ body {
 .progress {
   margin: 2em;
   width: 100%;
+}
+
+.question {
+  text-align: center;
+  color: papayawhip;
+}
+
+.false-button {
+  margin-left: 1em;
 }
 
 /* Canvas CSS */

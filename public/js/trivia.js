@@ -1,12 +1,12 @@
 const random = Math.floor(Math.random() * 5);
-const trueButton = document
-  .createElement("button")
-  .classList.add("true-button", "btn", "btn-info");
-const falseButton = document
-  .createElement("button")
-  .classList.add("false-button", "btn", "btn-info");
-const rightAnswerAudio = new Audio("../assets/rightanswer.mp3");
-const wrongAnswerAudio = new Audio("../assets/incorrect.swf.mp3");
+let trueButton = document.createElement("button");
+trueButton.classList.add("true-button", "btn", "btn-success");
+let falseButton = document.createElement("button");
+falseButton.classList.add("false-button", "btn", "btn-danger");
+let questionContainer = document.querySelector(".question-container");
+let rightAnswerAudio = new Audio("../assets/rightanswer.mp3");
+let wrongAnswerAudio = new Audio("../assets/incorrect.swf.mp3");
+let questionEl = document.querySelector(".question");
 
 const getQuestionsApi = async () => {
   const response = await fetch(
@@ -19,53 +19,48 @@ const getQuestionsApi = async () => {
   //   data = $.parseJSON(data);
   // }
   /// work on this
-  const question = data.results[random].question;
+  let question = data.results[random].question;
   console.log(question);
-  // $(".question-container").append(
-  //   '<h4 class="question-header">Question: </h4><p class="question"> ' +
-  //     question +
-  //     "</p>"
+  questionEl.textContent = question;
+  questionContainer.append(trueButton, falseButton);
+  trueButton.textContent = "True";
+  falseButton.textContent = "False";
 
-  // answerButtons();
-  // answerClickEvent(data);
-
-  // console.log(response);
+  answerClickEvent(data);
 };
 
 getQuestionsApi();
 
-// function answerButtons() {
-//   $(".question-container").append(trueButton, falseButton);
-// }
+function answerClickEvent(data) {
+  let correctAnswer = data.results[random].correct_answer;
+  let currentScore = Number(currentScoreEl.textContent);
+  console.log(correctAnswer);
 
-// function answerClickEvent(data) {
-//   const correctAnswer = data.results[randomQuestion].correct_answer;
+  trueButton.click((e) => {
+    console.log(e);
+    if (correctAnswer === "True") {
+      rightAnswerAudio.play();
+      currentScore = currentScore + 2;
+      currentScoreEl.textContent = currentScore;
+    } else {
+      wrongAnswerAudio.play();
+      currentScore = currentScore - 2;
+      currentScoreEl.textContent = currentScore;
+    }
+    getQuestionsApi();
+  });
 
-//   $(".true-button").click((e) => {
-//     const currentScore = parseInt($(".score").text());
-
-//     if (correctAnswer === "True") {
-//       rightAnswerAudio.play();
-//       currentScore = Number(currentScore + 2);
-//       $(".score").text(currentScore);
-//     } else {
-//       wrongAnswerAudio.play();
-//       currentScore = Number(currentScore - 2);
-//       $(".score").text(currentScore);
-//     }
-//     getQuestionsApi();
-//   });
-
-//   $(".false-button").click((e) => {
-//     const currentScore = parseInt($(".score").text());
-//     if (correctAnswer === "False") {
-//       rightAnswerAudio.play();
-//       currentScore = Number(currentScore + 2);
-//       $(".score").text(currentScore);
-//     } else {
-//       wrongAnswerAudio.play();
-//       currentScore = Number(currentScore - 2);
-//       $(".score").text(currentScore);
-//     }
-//     getQuestionsApi();
-//   });
+  falseButton.click((e) => {
+    console.log(e);
+    if (correctAnswer === "False") {
+      rightAnswerAudio.play();
+      currentScore = currentScore + 2;
+      currentScoreEl.textContent = currentScore;
+    } else {
+      wrongAnswerAudio.play();
+      currentScore = currentScore - 2;
+      currentScoreEl.textContent = currentScore;
+    }
+    getQuestionsApi();
+  });
+}

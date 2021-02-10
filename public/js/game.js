@@ -11,7 +11,7 @@ const canvasSize = 500;
 
 function centerCanvas() {
   let x = (windowWidth - width) / 2;
-  let y = windowHeight - height;
+  let y = windowHeight - height + 100;
   cnv.position(x, y);
 }
 
@@ -115,7 +115,6 @@ function timer(el) {
 //Setup function for P5JS
 function setup() {
   cnv = createCanvas(canvasSize, canvasSize);
-  // centerCanvas();
   windowResized();
   cnv.parent("canvas-container");
 
