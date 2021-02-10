@@ -1,65 +1,71 @@
-const randomQuestion = Math.floor(Math.random() * 5);
-const trueButton = $("<button>True</button>").addClass("true-button");
-const falseButton = $("<button>False</button>").addClass("false-button");
-const rightAnswerAudio = new Audio("rightanswer.mp3");
-const wrongAnswerAudio = new Audio("incorrect.swf.mp3");
+const random = Math.floor(Math.random() * 5);
+const trueButton = document
+  .createElement("button")
+  .classList.add("true-button", "btn", "btn-info");
+const falseButton = document
+  .createElement("button")
+  .classList.add("false-button", "btn", "btn-info");
+const rightAnswerAudio = new Audio("../assets/rightanswer.mp3");
+const wrongAnswerAudio = new Audio("../assets/incorrect.swf.mp3");
 
-function getQuestionsApi() {
-  fetch("https://opentdb.com/api.php?amount=5").then((response) => {
-    $(".question-container").empty();
-    if (typeof data === "string") {
-      data = $.parseJSON(data);
-    }
-    /// work on this
-    const question = data.results[randomQuestion].question;
-    console.log(question);
-    $(".question-container").append(
-      '<h4 class="question-header">Question: </h4><p class="question"> ' +
-        question +
-        "</p>"
-    );
-    answerButtons();
-    answerClickEvent(data);
+const getQuestionsApi = async () => {
+  const response = await fetch(
+    "https://opentdb.com/api.php?amount=5&type=boolean"
+  );
+  const data = await response.json();
+  console.log(data);
+  // $(".question-container").empty();
+  // if (typeof data === "string") {
+  //   data = $.parseJSON(data);
+  // }
+  /// work on this
+  const question = data.results[random].question;
+  console.log(question);
+  // $(".question-container").append(
+  //   '<h4 class="question-header">Question: </h4><p class="question"> ' +
+  //     question +
+  //     "</p>"
 
-    console.log(response);
-  });
+  // answerButtons();
+  // answerClickEvent(data);
 
-  getQuestionsApi();
+  // console.log(response);
+};
 
-  function answerButtons() {
-    $(".question-container").append(trueButton, falseButton);
-  }
+getQuestionsApi();
 
-  function answerClickEvent(data) {
-    const correctAnswer = data.results[randomQuestion].correct_answer;
+// function answerButtons() {
+//   $(".question-container").append(trueButton, falseButton);
+// }
 
-    $(".true-button").click((e) => {
-      const currentScore = parseInt($(".score").text());
+// function answerClickEvent(data) {
+//   const correctAnswer = data.results[randomQuestion].correct_answer;
 
-      if (correctAnswer === "True") {
-        rightAnswerAudio.play();
-        currentScore = Number(currentScore + 2);
-        $(".score").text(currentScore);
-      } else {
-        wrongAnswerAudio.play();
-        currentScore = Number(currentScore - 2);
-        $(".score").text(currentScore);
-      }
-      getQuestionsApi();
-    });
+//   $(".true-button").click((e) => {
+//     const currentScore = parseInt($(".score").text());
 
-    $(".false-button").click((e) => {
-      const currentScore = parseInt($(".score").text());
-      if (correctAnswer === "False") {
-        rightAnswerAudio.play();
-        currentScore = Number(currentScore + 2);
-        $(".score").text(currentScore);
-      } else {
-        wrongAnswerAudio.play();
-        currentScore = Number(currentScore - 2);
-        $(".score").text(currentScore);
-      }
-      getQuestionsApi();
-    });
-  }
-}
+//     if (correctAnswer === "True") {
+//       rightAnswerAudio.play();
+//       currentScore = Number(currentScore + 2);
+//       $(".score").text(currentScore);
+//     } else {
+//       wrongAnswerAudio.play();
+//       currentScore = Number(currentScore - 2);
+//       $(".score").text(currentScore);
+//     }
+//     getQuestionsApi();
+//   });
+
+//   $(".false-button").click((e) => {
+//     const currentScore = parseInt($(".score").text());
+//     if (correctAnswer === "False") {
+//       rightAnswerAudio.play();
+//       currentScore = Number(currentScore + 2);
+//       $(".score").text(currentScore);
+//     } else {
+//       wrongAnswerAudio.play();
+//       currentScore = Number(currentScore - 2);
+//       $(".score").text(currentScore);
+//     }
+//     getQuestionsApi();
+//   });

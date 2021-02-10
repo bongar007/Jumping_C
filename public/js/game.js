@@ -11,7 +11,7 @@ const canvasSize = 500;
 
 function centerCanvas() {
   let x = (windowWidth - width) / 2;
-  let y = (windowHeight - height) / 2;
+  let y = windowHeight - height;
   cnv.position(x, y);
 }
 
@@ -83,17 +83,16 @@ function drawZeros(grid) {
 function timer(el) {
   let current_progress = 0;
   const downloadTimer = setInterval(function () {
-    current_progress += 1;
+    current_progress++;
     const progressBar = document.getElementById("dynamic");
     progressBar.style.width = `${current_progress * 10}%`;
     progressBar.setAttribute("aria-valuenow", current_progress);
     progressBar.textContent = `${10 - current_progress}`;
     if (current_progress >= 10) {
       clearInterval(downloadTimer);
+
       highScore = currentScoreEl.textContent;
-
       highScoreEl.textContent = `Your best score is ${highScore}`;
-
       let content = { highScore: highScore };
       let options = {
         method: "POST",
@@ -105,7 +104,6 @@ function timer(el) {
       const sendingHighScore = async function () {
         const response = await fetch("/users/api", options);
         const data = await response.json();
-        console.log(data);
       };
       sendingHighScore();
       noLoop();
@@ -117,22 +115,23 @@ function timer(el) {
 //Setup function for P5JS
 function setup() {
   cnv = createCanvas(canvasSize, canvasSize);
-  centerCanvas();
+  // centerCanvas();
+  windowResized();
   cnv.parent("canvas-container");
 
   readyElement = createElement("h1", "READY???");
   readyElement.addClass("show get-ready");
   setTimeout(() => {
-    readyElement.removeClass("show").addClass("hide");
+    timer(readyElement), readyElement.removeClass("show").addClass("hide");
   }, 2000);
-  timer(readyElement);
+
   cnv.mouseClicked(locateC);
 
   frameRate(0.5);
 }
 // Draw function for P5JS
 function draw() {
-  createCanvas(canvasSize, canvasSize);
+  cnv;
   background(0);
   generatedGrid = generateGrid();
   drawZeros(generatedGrid);

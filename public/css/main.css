@@ -3,8 +3,14 @@ body {
   background: #455a64;
 }
 
+/* Header Styles */
+.login,
+.logout {
+  list-style-type: none;
+}
+
 .main-content-wrapper {
-  height: 100%;
+  height: 50em;
 }
 
 .get-ready {
@@ -25,6 +31,10 @@ body {
   display: none;
 }
 
+.welcome {
+  color: papayawhip;
+}
+
 .canvas-container {
   height: 45em;
 }
@@ -42,25 +52,30 @@ body {
 }
 
 .progress {
-  margin: 1em;
+  margin: 2em;
   width: 100%;
 }
 
 /* Canvas CSS */
 
 .p5Canvas {
-  top: 22em;
+  top: 30em;
 }
 
 /* FOOTER STYLES  */
 
 .footer-wrapper {
-  overflow: hidden;
+  /* overflow: hidden; */
+  height: 15em;
   margin-top: 2em;
   background: #262626;
   color: #627482 !important;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+footer {
+  padding: 1em;
 }
 
 small {
@@ -79,7 +94,7 @@ small {
   ) !important;
 }
 
-h3 {
+.brand-name {
   font-size: calc(
     34px + (40 - 34) * ((100vw - 360px) / (1600 - 360))
   ) !important;
