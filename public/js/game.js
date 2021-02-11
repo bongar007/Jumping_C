@@ -1,10 +1,9 @@
 let cnv;
 let generatedGrid = [];
 let readyElement;
-// let counter = 30;
 let score = 0;
 let highScore = 0;
-// let timeleft = 10;
+const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
 const canvasSize = 500;
@@ -80,7 +79,13 @@ function drawZeros(grid) {
 }
 
 //Adding a count down to create an "end of game" scenario, displayed by a progress-bar
-function timer(el) {
+//passing it the readyEl, and data obj from the trivia API
+function timer(el, data) {
+  //Calling to Trivia API and activating the answer buttons
+  getQuestionsApi();
+  bennyHill.play();
+
+  //Setting up count down with progress bar
   let current_progress = 0;
   const downloadTimer = setInterval(function () {
     current_progress++;
@@ -88,11 +93,16 @@ function timer(el) {
     progressBar.style.width = `${current_progress * 10}%`;
     progressBar.setAttribute("aria-valuenow", current_progress);
     progressBar.textContent = `${10 - current_progress}`;
+
+    //Once time runs out:
     if (current_progress >= 10) {
       clearInterval(downloadTimer);
-
+      bennyHill.pause();
+      //Setting up for sending higScore to DB
       highScore = currentScoreEl.textContent;
       highScoreEl.textContent = `Your best score is ${highScore}`;
+
+      //Options for req.body
       let content = { highScore: highScore };
       let options = {
         method: "POST",
@@ -101,14 +111,20 @@ function timer(el) {
         },
         body: JSON.stringify(content),
       };
+
+      //Sending Highscore to DB
       const sendingHighScore = async function () {
         const response = await fetch("/users/api", options);
-        const data = await response.json();
+        const highScoreData = await response.json();
       };
+      //Calling all relevant functions once timer hits 0
       sendingHighScore();
       noLoop();
       cnv.addClass("hide");
+      questionContainer.classList.add("hide");
+      scoresContainer.classList.remove("col-md-6");
       readyElement.removeClass("hide").addClass("show").html("Game Over!!");
+      readyElement.position(0, height - 100);
     }
   }, 1000);
 }
@@ -120,6 +136,7 @@ function setup() {
 
   readyElement = createElement("h1", "READY???");
   readyElement.addClass("show get-ready");
+  readyElement.position(0, height - 100);
   setTimeout(() => {
     timer(readyElement), readyElement.removeClass("show").addClass("hide");
   }, 2000);

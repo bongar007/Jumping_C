@@ -18,4 +18,11 @@ router.get("/dashboard", ensureAuthenticated, (req, res) =>
   })
 );
 
+//Intro
+router.get("/intro", ensureAuthenticated, (req, res) =>
+  res.render("intro", {
+    user: req.user,
+  })
+);
+
 module.exports = router;

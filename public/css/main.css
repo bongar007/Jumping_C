@@ -10,7 +10,7 @@ body {
 }
 
 .main-content-wrapper {
-  height: 50em;
+  height: 60em;
 }
 
 /* .get-ready {
@@ -37,6 +37,10 @@ body {
 
 .canvas-container {
   height: 45em;
+}
+
+.scores-container {
+  text-align: center;
 }
 
 .high-score {
