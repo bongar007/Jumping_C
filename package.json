@@ -35,7 +35,5 @@
     "rand-token": "^1.0.1",
     "zl-fetch": "^3.2.3"
   },
-  "devDependencies": {
-    "browserify": "^17.0.0"
-  }
+  "devDependencies": {}
 }
