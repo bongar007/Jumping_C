@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "devStart": "nodemon app.js",
-    "build": "browserify game.js -o bundle.js"
+    "devStart": "nodemon app.js"
   },
   "engines": {
     "node": "14.15.1",
@@ -32,8 +31,7 @@
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "rand-token": "^1.0.1",
-    "zl-fetch": "^3.2.3"
+    "rand-token": "^1.0.1"
   },
   "devDependencies": {}
 }
