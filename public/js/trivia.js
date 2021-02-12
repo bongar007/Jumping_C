@@ -21,8 +21,6 @@ const getQuestionsApi = async () => {
   answerClickEvent(data);
 };
 
-console.log(data);
-
 function answerClickEvent(obj) {
   let correctAnswer = obj.results[random].correct_answer;
   let currentScore = Number(currentScoreEl.textContent);

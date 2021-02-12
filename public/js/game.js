@@ -7,6 +7,7 @@ const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
 const canvasSize = 500;
+const nav = document.querySelector("nav");
 
 function centerCanvas() {
   let x = (windowWidth - width) / 2;
@@ -82,6 +83,7 @@ function drawZeros(grid) {
 //passing it the readyEl, and data obj from the trivia API
 function timer(el, data) {
   //Calling to Trivia API and activating the answer buttons
+  nav.classList.add("hide");
   getQuestionsApi();
   bennyHill.play();
 

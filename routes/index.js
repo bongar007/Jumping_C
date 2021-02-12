@@ -25,4 +25,10 @@ router.get("/intro", ensureAuthenticated, (req, res) =>
   })
 );
 
+router.get("/about", ensureAuthenticated, (req, res) =>
+  res.render("about", {
+    user: req.user,
+  })
+);
+
 module.exports = router;

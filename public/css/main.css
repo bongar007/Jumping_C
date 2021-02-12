@@ -11,6 +11,7 @@ body {
 
 .main-content-wrapper {
   height: 60em;
+  padding-top: 3em;
 }
 
 /* .get-ready {
@@ -69,6 +70,25 @@ body {
   margin-left: 1em;
 }
 
+/* About Page */
+
+.bio-conatiner {
+  margin-top: 3em;
+}
+
+.profile-picture {
+  background-image: url("../assets/img/attila.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.bio,
+.bigger {
+  color: papayawhip;
+}
+.bigger {
+  font-size: 21px;
+}
 /* Canvas CSS */
 
 .p5Canvas {
