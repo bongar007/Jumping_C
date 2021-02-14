@@ -13,7 +13,6 @@ const getQuestionsApi = async () => {
     "https://opentdb.com/api.php?amount=5&type=boolean"
   );
   data = await response.json();
-  console.log(data);
 
   let question = data.results[random].question;
   console.log(question);

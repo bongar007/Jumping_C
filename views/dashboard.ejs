@@ -1,29 +1,50 @@
-<p class="welcome lead mt-3 mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
-
-<div id="canvas-container" class="container game-container">
-  <div class="progress">
-    <div
-      class="progress-bar progress-bar-animated active"
-      id="dynamic"
-      role="progressbar"
-      aria-valuemin="0"
-      aria-valuenow="0"
-      aria-valuemax="10"
-    ></div>
-    <span id="current-progress"></span>
-  </div>
+<div class="container">
   <div class="row">
-    <div class="container scores-container col-md-6">
-      <span class="best-score"><%= user.highScore %> </span><br />
-      <span class="high-score"></span><br />
-      <span class="current-score"></span>
+    <ul class="col-md-4">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <a type="button" class="btn btn-secondary" href="/intro">Home</a>
+        <a type="button" class="btn btn-secondary restart" href="/dashboard"
+          >Restart</a
+        >
+      </div>
+    </ul>
+    <ul class="col-md-8">
+      <div class="btn-group ml-auto" role="group">
+        <button type="button" class="btn btn-secondary disabled">
+          Personal Best Score:
+          <span class="best-score"><%= user.highScore %></span>
+        </button>
+        <button type="button" class="btn btn-secondary disabled">
+          High Score: <span class="high-score">0</span>
+        </button>
+        <button type="button" class="btn btn-secondary disabled">
+          Current Score: <span class="current-score">0</span>
+        </button>
+      </div>
+    </ul>
+  </div>
+
+  <p class="welcome lead mt-3 mb-3">Welcome <%= user.name %></p>
+
+  <div id="canvas-container" class="container game-container">
+    <div class="progress">
+      <div
+        class="progress-bar progress-bar-animated active"
+        id="dynamic"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuenow="0"
+        aria-valuemax="10"
+      ></div>
+      <span id="current-progress"></span>
     </div>
-    <div class="container question-container col-md-6">
-      <h3 class="question-header">Question:</h3>
-      <p class="question"></p>
-      <button class="true-button btn btn-success">True</button>
-      <button class="false-button btn btn-danger">False</button>
+    <div class="row">
+      <div class="container question-container col-md-6">
+        <h3 class="question-header">Question:</h3>
+        <p class="question"></p>
+        <button class="true-button btn btn-success">True</button>
+        <button class="false-button btn btn-danger">False</button>
+      </div>
     </div>
   </div>
 </div>

@@ -6,12 +6,16 @@ let highScore = 0;
 const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
+highScoreEl.textContent = sessionStorage.getItem("current_high");
+const bestScoreEl = document.querySelector(".best-score");
+const gameContainerEl = document.getElementById("canvas-container");
+const restartEl = document.querySelector(".restart");
 const canvasSize = 500;
 const nav = document.querySelector("nav");
 
 function centerCanvas() {
-  let x = (windowWidth - width) / 2;
-  let y = windowHeight - height + 100;
+  let x = (gameContainerEl.width - width) / 2;
+  let y = gameContainerEl.height - height + 100;
   cnv.position(x, y);
 }
 
@@ -83,7 +87,6 @@ function drawZeros(grid) {
 //passing it the readyEl, and data obj from the trivia API
 function timer(el, data) {
   //Calling to Trivia API and activating the answer buttons
-  nav.classList.add("hide");
   getQuestionsApi();
   bennyHill.play();
 
@@ -96,39 +99,66 @@ function timer(el, data) {
     progressBar.setAttribute("aria-valuenow", current_progress);
     progressBar.textContent = `${10 - current_progress}`;
 
+    currentScoreEl.addEventListener("change", () =>
+      sessionStorage.setItem("current_high", Number(currentScoreEl.textContent))
+    );
+
     //Once time runs out:
     if (current_progress >= 10) {
       clearInterval(downloadTimer);
       bennyHill.pause();
-      //Setting up for sending higScore to DB
-      highScore = currentScoreEl.textContent;
-      highScoreEl.textContent = `Your best score is ${highScore}`;
+      // Setting up for sending higScore to DB
+      highScore = Number(currentScoreEl.textContent);
+      let bestScore = Number(bestScoreEl.textContent);
 
-      //Options for req.body
-      let content = { highScore: highScore };
-      let options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(content),
-      };
+      //Storing current high score in Session Storage
+      sessionStorage.setItem("current_high", highScore);
 
-      //Sending Highscore to DB
-      const sendingHighScore = async function () {
-        const response = await fetch("/users/api", options);
-        const highScoreData = await response.json();
-      };
+      if (highScore < bestScore) {
+        highScoreEl.textContent = bestScore;
+      } else if (highScore >= bestScore) {
+        bestScoreEl.textContent = highScore;
+        highScoreEl.textContent = highScore;
+      }
+      //Update DB if highscore is larger than the Personal Best score
+      if (highScore > bestScore) {
+        //Options for req.body
+        content = { highScore: highScore };
+        let options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(content),
+        };
+
+        //Sending Highscore to DB
+        const sendingHighScore = async function () {
+          const response = await fetch("/users/api", options);
+          const highScoreData = await response.json();
+        };
+        sendingHighScore();
+      }
+
       //Calling all relevant functions once timer hits 0
-      sendingHighScore();
+
       noLoop();
       cnv.addClass("hide");
       questionContainer.classList.add("hide");
-      scoresContainer.classList.remove("col-md-6");
+      let storedHighScore = Number(sessionStorage.getItem("current_high"));
+      highScoreEl.textContent = storedHighScore;
       readyElement.removeClass("hide").addClass("show").html("Game Over!!");
       readyElement.position(0, height - 100);
     }
   }, 1000);
+
+  // Adding logic to "Restart" button to keep the current high score and restart game
+  restartEl.addEventListener("click", function () {
+    if (sessionStorage.getItem("current_high")) {
+      // Restore the contents of the text field
+      highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
+    }
+  });
 }
 //Setup function for P5JS
 function setup() {

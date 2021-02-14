@@ -3,21 +3,25 @@ body {
   background: #455a64;
 }
 
+main {
+  display: none;
+}
+
 /* Header Styles */
 .login,
 .logout {
   list-style-type: none;
 }
 
-.main-content-wrapper {
-  height: 60em;
-  padding-top: 3em;
+.navbar-brand {
+  font-size: 2rem;
 }
 
-/* .get-ready {
-  position: relative;
-  bottom: 40em;
-} */
+/* Main wrapper Styles */
+
+.main-content-wrapper {
+  height: 100%;
+}
 
 .show {
   position: absolute;
@@ -36,7 +40,7 @@ body {
   color: papayawhip;
 }
 
-.canvas-container {
+#canvas-container {
   height: 45em;
 }
 
@@ -50,10 +54,10 @@ body {
 }
 
 .current-score {
-  color: white;
-  font-size: x-large;
+  color: brown;
+  font-size: large;
   font-weight: bold;
-  font-style: italic;
+  font-style: inherit;
 }
 
 .progress {
@@ -82,18 +86,51 @@ body {
   background-position: center;
   background-size: contain;
 }
+.coming-from-picture {
+  background-image: url("../assets/img/budapest.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.going-to-picture {
+  background-image: url("../assets/img/future.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.bio-container,
+.coming-from-container {
+  margin-bottom: 10em;
+}
+
 .bio,
-.bigger {
+.bigger,
+.coming-from-story,
+.going-to-story {
   color: papayawhip;
 }
 .bigger {
   font-size: 21px;
 }
-/* Canvas CSS */
 
-.p5Canvas {
-  top: 30em;
+/* Game page */
+.instruction {
+  font-size: 1.25em;
 }
+
+.button-container {
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+.start-button {
+  font-size: 1.25em;
+  padding: 1rem;
+}
+
+/* Canvas CSS */
 
 /* FOOTER STYLES  */
 
