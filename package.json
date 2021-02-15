@@ -24,7 +24,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "method-override": "^3.0.0",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.11.16",
     "nedb": "^1.8.0",
     "p5": "^1.2.0",
     "passport": "^0.4.1",
