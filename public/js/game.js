@@ -1,27 +1,29 @@
 let cnv;
 let generatedGrid = [];
-let readyElement;
+const readyElementEl = document.querySelector(".ready-element");
 let score = 0;
 let highScore = 0;
 const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
-highScoreEl.textContent = sessionStorage.getItem("current_high");
+highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
 const bestScoreEl = document.querySelector(".best-score");
-const gameContainerEl = document.getElementById("canvas-container");
+const canvasContainerEl = document.getElementById("canvas-container");
+const answerButtonsContainerEl = document.querySelector(
+  ".answer-buttons-container"
+);
+
 const restartEl = document.querySelector(".restart");
 const canvasSize = 500;
 const nav = document.querySelector("nav");
 
-function centerCanvas() {
-  let x = (gameContainerEl.width - width) / 2;
-  let y = gameContainerEl.height - height + 100;
+function centerCanvas(cnv) {
+  let x = (canvasContainerEl.offsetWidth - canvasSize) / 2;
+  let y = canvasContainerEl.offsetHeight - canvasSize;
+  console.log(x, y);
   cnv.position(x, y);
 }
 
-function windowResized() {
-  centerCanvas();
-}
 //Creating a 2D array with the "C" randomly inserted
 function generateGrid() {
   let grid = [];
@@ -46,11 +48,9 @@ function locateC(event) {
   const y = Math.floor(layerY / tileSize);
 
   if (generatedGrid[x][y] === "C") {
-    console.log("YAY!! GOT ONE");
     score++;
     currentScoreEl.textContent = score;
   } else {
-    console.log("NOPE, THATS NOT IT");
     score -= 0.5;
     currentScoreEl.textContent = score;
   }
@@ -145,10 +145,12 @@ function timer(el, data) {
       noLoop();
       cnv.addClass("hide");
       questionContainer.classList.add("hide");
+      answerButtonsContainerEl.classList.add("hide");
       let storedHighScore = Number(sessionStorage.getItem("current_high"));
       highScoreEl.textContent = storedHighScore;
-      readyElement.removeClass("hide").addClass("show").html("Game Over!!");
-      readyElement.position(0, height - 100);
+      readyElementEl.classList.remove("hide");
+      readyElementEl.classList.add("show");
+      readyElementEl.textContent = "Game Over!!";
     }
   }, 1000);
 
@@ -162,15 +164,15 @@ function timer(el, data) {
 }
 //Setup function for P5JS
 function setup() {
+  highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
   cnv = createCanvas(canvasSize, canvasSize);
-  windowResized();
+  centerCanvas(cnv);
   cnv.parent("canvas-container");
 
-  readyElement = createElement("h1", "READY???");
-  readyElement.addClass("show get-ready");
-  readyElement.position(0, height - 100);
   setTimeout(() => {
-    timer(readyElement), readyElement.removeClass("show").addClass("hide");
+    timer(readyElementEl),
+      readyElementEl.classList.remove("show"),
+      readyElementEl.classList.add("hide");
   }, 2000);
 
   cnv.mouseClicked(locateC);

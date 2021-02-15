@@ -5,12 +5,6 @@ const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 // Welcome Page
 router.get("/", forwardAuthenticated, (req, res) => res.render("welcome"));
 
-// router.get("/dashboard", ensureAuthenticated, (req, res) =>
-//   res.render("partials/header", {
-//     user: req.user,
-//   })
-// );
-
 // Dashboard
 router.get("/dashboard", ensureAuthenticated, (req, res) =>
   res.render("dashboard", {
@@ -24,9 +18,15 @@ router.get("/intro", ensureAuthenticated, (req, res) =>
     user: req.user,
   })
 );
-
+//About
 router.get("/about", ensureAuthenticated, (req, res) =>
   res.render("about", {
+    user: req.user,
+  })
+);
+//Features
+router.get("/features", ensureAuthenticated, (req, res) =>
+  res.render("features", {
     user: req.user,
   })
 );
