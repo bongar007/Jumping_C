@@ -9,7 +9,7 @@ const p5Instance = (p5) => {
       100
     );
     for (let i = 0; i < particlesLength; i++) {
-      p5.particles.push(new Particle());
+      particles.push(new Particle());
     }
   };
 
