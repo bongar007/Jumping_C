@@ -12,11 +12,11 @@ const canvasContainerEl = document.getElementById("canvas-container");
 const answerButtonsContainerEl = document.querySelector(
   ".answer-buttons-container"
 );
-
 const restartEl = document.querySelector(".restart");
 const canvasSize = 500;
 const nav = document.querySelector("nav");
 
+//Centering the canvas in the parent container which was set to position:relative to achieve that
 function centerCanvas(cnv) {
   let x = (canvasContainerEl.offsetWidth - canvasSize) / 2;
   let y = canvasContainerEl.offsetHeight - canvasSize;
