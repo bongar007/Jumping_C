@@ -14,7 +14,7 @@ const getQuestionsApi = async () => {
   );
   data = await response.json();
 
-  let question = data.results[random].question;
+  let question = unescape(data.results[random].question);
   console.log(question);
   questionEl.textContent = question;
   answerClickEvent(data);

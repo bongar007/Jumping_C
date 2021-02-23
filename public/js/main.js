@@ -1,26 +1,30 @@
-const btns = document.querySelectorAll(".nav-link");
+const navItem = document.querySelector(".nav-item");
+const btn = document.getElementById("button");
+console.log(btn);
+// function activeClassToggle() {
+// navItem.addEventListener("click", (e) => {
+//   let href = e.target.firstElementChild.getAttribute("href");
+//   console.log(href);
+//   localStorage.setItem("href", href);
+//   let activeLink = localStorage.getItem("href");
+//   let path = location.pathname;
+//   if (activeLink === path) e.target.classList.add("active");
+// });
+// // }
 
-for (let i = 0; i < btns.length; i++) {
-  //TODO to rewrite using href as reference
-  btns[i].addEventListener("click", function () {
-    let current = document.getElementsByClassName("active");
+// // activeClassToggle(); ////////////////////////////NEEDS WORK
 
-    current[0].className = current[0].className.replace(" active", "");
-
-    this.className += " active";
-  });
-}
-
+// / Creating scrolling effect on Features Page
 const sections = [...document.querySelectorAll("section")];
 const options = {
   rootMargin: "0px",
-  threshold: 0.25,
+  threshold: 0.2,
 };
 const callback = (entries, observer) => {
   entries.forEach((entry) => {
     const { target } = entry;
 
-    if (entry.intersectionRatio >= 0.25) {
+    if (entry.intersectionRatio >= 0.2) {
       target.classList.add("is-visible");
     } else {
       target.classList.remove("is-visible");
@@ -31,4 +35,23 @@ const observer = new IntersectionObserver(callback, options);
 
 sections.forEach((section, index) => {
   observer.observe(section);
+});
+// /////////Scroll to top arrow
+
+document?.body.addEventListener("scroll", function () {
+  if (document?.body?.scrollTop > 300) {
+    btn.classList.add("show");
+  } else {
+    btn.classList.remove("show");
+  }
+});
+
+btn?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
 });

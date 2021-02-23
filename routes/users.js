@@ -99,7 +99,7 @@ router.get("/users/getToken", function (req, res) {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/intro",
+    successRedirect: "/game",
     failureRedirect: "/users/login",
     failureFlash: true,
   })(req, res, next);
@@ -109,7 +109,7 @@ router.post("/login", (req, res, next) => {
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "You are logged out");
-  res.redirect("/users/login");
+  res.redirect("/intro");
 });
 
 //Updating HighScore

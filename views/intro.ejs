@@ -1,4 +1,4 @@
-<%- include('./partials/header') %>
+<%- include('./partials/header') %> <%- include ("./partials/messages"); %>
 <div id="particles" class="container-fluid">
   <div class="intro-container">
     <div class="container welcome-container">
@@ -7,15 +7,18 @@
         <div class="col-6 justify-content-center">
           <h1 class="display-3">Hello, and welcome</h1>
           <p class="instruction">
-            Click on the "C" and answer the questions correctly to collect
-            points. A "C" worth one point and a correct answer yields two
-            points. If you answer incorrectly, you will lose two points, if you
-            click off the "c", you lose half a point. The program will track
-            your high scores as well. Your progress will be saved, now that you
-            registered, and will be able to come back to try to beat your best
-            score. This program in an ongoing design to practice JavaScript and
-            have fun doing it. More features will be added as I can think of
-            them. Have fun!!! You have got 1 minute! Tic-Toc...
+            <span class="bigger">To my portfolio site </span>
+            where I will show you around the features, I was interested in
+            showcasing. By clicking the button below, you will enter a simple
+            game page. The rules are simple: click on the "c" to collect 1
+            point, and answer the trivia questions, as well to boost your score
+            by 2 each time you are correct. Careful though, not hitting the "c"
+            will deduct a half a point, and the wrong answer deducts 2. You need
+            to be fast as the "c" will not wait for you! Your high score will be
+            stored while you are on the site, and your best score will be saved
+            in the database for you to beat when you come back in the future.
+            Have fun, and please browse around to learn more about me, and the
+            features of this site.
           </p>
         </div>
         <div class="col"></div>
@@ -24,7 +27,7 @@
 
     <div class="container button-container">
       <div class="button-row row justify-content-center">
-        <a href="/dashboard" class="start-button btn btn-primary"
+        <a href="/game" class="start-button btn btn-primary"
           >Click to find the "C" !!</a
         >
       </div>

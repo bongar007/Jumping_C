@@ -157,7 +157,6 @@ function timer(el, data) {
   // Adding logic to "Restart" button to keep the current high score and restart game
   restartEl.addEventListener("click", function () {
     if (sessionStorage.getItem("current_high")) {
-      // Restore the contents of the text field
       highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
     }
   });
