@@ -7,13 +7,12 @@ const p5Instance = (p5) => {
   const particlesEl = document.getElementById("particles");
   let p5width = Number(particlesEl.offsetWidth);
   let p5height = Number(particlesEl.offsetHeight);
-  console.log(p5width, p5height);
 
   class Particle {
     constructor() {
       this.pos = p5.createVector(p5.random(p5width), p5.random(p5height));
       this.vel = p5.createVector(p5.random(-2, 2), p5.random(-2, 2));
-      this.size = 5;
+      this.size = 3;
     }
 
     update() {
@@ -46,7 +45,7 @@ const p5Instance = (p5) => {
           particle.pos.y
         );
         if (d < 120) {
-          const alpha = map(d, 0, 120, 0, 0.25);
+          const alpha = p5.map(d, 0, 120, 0, 0.25);
           p5.stroke(`rgba(255, 255, 255, ${alpha})`);
           p5.line(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y);
         }

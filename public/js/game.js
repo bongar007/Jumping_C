@@ -1,6 +1,9 @@
-let cnv;
+new p5();
+
 let generatedGrid = [];
+let cnv;
 const readyElementEl = document.querySelector(".ready-element");
+const gameOverEl = document.querySelector(".game-over-element");
 let score = 0;
 let highScore = 0;
 const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
@@ -15,6 +18,14 @@ const answerButtonsContainerEl = document.querySelector(
 const restartEl = document.querySelector(".restart");
 const canvasSize = 500;
 const nav = document.querySelector("nav");
+// const startButton = document.querySelector(".button-row > .start-button");
+
+// Adding logic to "Restart" button to keep the current high score and restart game
+restartEl.addEventListener("click", function () {
+  if (sessionStorage.getItem("current_high")) {
+    highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
+  }
+});
 
 //Centering the canvas in the parent container which was set to position:relative to achieve that
 function centerCanvas(cnv) {
@@ -66,6 +77,7 @@ function createZero(x, y) {
   strokeWeight(2);
   ellipse(x * tileSize + 10, y * tileSize + 10, 12, 16);
 }
+
 //filling the canvas with '0' and the "c"
 function drawZeros(grid) {
   const tileSize = canvasSize / grid.length;
@@ -148,37 +160,39 @@ function timer(el, data) {
       answerButtonsContainerEl.classList.add("hide");
       let storedHighScore = Number(sessionStorage.getItem("current_high"));
       highScoreEl.textContent = storedHighScore;
-      readyElementEl.classList.remove("hide");
-      readyElementEl.classList.add("show");
-      readyElementEl.textContent = "Game Over!!";
+      gameOverEl.classList.remove("hide");
+      gameOverEl.classList.add("show");
     }
   }, 1000);
-
-  // Adding logic to "Restart" button to keep the current high score and restart game
-  restartEl.addEventListener("click", function () {
-    if (sessionStorage.getItem("current_high")) {
-      highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
-    }
-  });
 }
-//Setup function for P5JS
+
+let texts = ["READY???", "STEADY???", "GO!!!"];
+let count = 0;
+function changeText() {
+  readyElementEl.textContent = texts[count];
+  if (count < 3) {
+    count++;
+  } else {
+    clearInterval(changeText);
+  }
+}
+setInterval(changeText, 1500);
+
 function setup() {
-  highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
   cnv = createCanvas(canvasSize, canvasSize);
+  highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
   centerCanvas(cnv);
   cnv.parent("canvas-container");
-
+  frameRate(0.1);
   setTimeout(() => {
-    timer(readyElementEl),
+    frameRate(0.5),
+      timer(readyElementEl),
       readyElementEl.classList.remove("show"),
       readyElementEl.classList.add("hide");
-  }, 2000);
-
+  }, 5000);
   cnv.mouseClicked(locateC);
-
-  frameRate(0.5);
 }
-// Draw function for P5JS
+
 function draw() {
   cnv;
   background(0);
