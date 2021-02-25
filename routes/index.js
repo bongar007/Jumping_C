@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const nodemailer = require("nodemailer");
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 
 // Welcome Page
@@ -27,5 +28,39 @@ router.get("/features", (req, res) =>
     user: req.user,
   })
 );
+
+//Contact Me form
+
+router.post("/contact", (req, res) => {
+  async function main() {
+    let transporter = nodemailer.createTransport({
+      service: "Gmail",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.GMAIL_EMAIL,
+        pass: process.env.GMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      name: req.body.name,
+      from: req.body.email,
+      to: "bongar007@gmail.com",
+      subject: req.body.subject,
+      text: req.body.textarea,
+    });
+
+    req.flash("success_msg", "Thank you for contacting me!");
+    console.log("Message sent: %s", info.messageId);
+  }
+
+  main().catch(console.error);
+  res.render("intro");
+});
 
 module.exports = router;

@@ -42,7 +42,30 @@ main {
   font-size: inherit;
 }
 
+/* Login Page */
+
+.login-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* Intro Page */
+.jumbotron {
+  background: rgba(55, 100, 144, 0.2);
+  margin: auto;
+}
+.jumbotron > p {
+  color: papayawhip;
+}
+
+.form-control {
+  background-color: #ced4da;
+}
+
+fieldset > legend,
+.form-group label {
+  color: #1a1a1a;
+}
 
 #particles {
   min-height: 100vh;
@@ -203,7 +226,6 @@ main {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Step 2: Reference Individual Icons */
 #button::after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;

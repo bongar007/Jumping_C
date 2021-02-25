@@ -8,7 +8,7 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const rellax = require("rellax");
+const nodeMailer = require("nodemailer");
 
 const app = express();
 

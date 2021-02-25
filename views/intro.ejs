@@ -1,31 +1,60 @@
 <%- include('./partials/header') %> <%- include ("./partials/messages"); %>
 <div id="particles" class="container-fluid">
   <div class="intro-container">
-    <div class="container welcome-container">
-      <div class="welcome row justify-content-center">
-        <div class="col"></div>
-        <div class="col-6 justify-content-center">
-          <h1 class="display-3">Hello, and welcome</h1>
-          <p class="instruction">
-            <span class="bigger">To my portfolio site </span>
-            where I will show you around the features, I was interested in
-            showcasing. By clicking the button below, you will enter a simple
-            game page. The rules are simple: click on the "c" to collect 1
-            point, and answer the trivia questions, as well to boost your score
-            by 2 each time you are correct. Careful though, not hitting the "c"
-            will deduct a half a point, and the wrong answer deducts 2. You need
-            to be fast as the "c" will not wait for you! Your high score will be
-            stored while you are on the site, and your best score will be saved
-            in the database for you to beat when you come back in the future.
-            Have fun, and please browse around to learn more about me, and the
-            features of this site.
-          </p>
-        </div>
-        <div class="col"></div>
+    
+    <div class="col-md-10 jumbotron">
+      <h1 class="display-3">Hello, and welcome</h1>
+      <%- include ("./partials/messages"); %>
+      <p class="lead">This is my professional portfolio site to share what I have been working on, as well as a little bit about myself</p>
+      <hr class="my-4">
+      <p class="instruction"><span class="bigger">In this Node project, </span>
+        I will show you around the features, I was interested in
+        showcasing. By navigating to the game page, you will enter a simple
+        game. The rules are simple: click on the "c" to collect 1
+        point, and answer the trivia questions, as well to boost your score
+        by 2 each time you are correct. Careful though, not hitting the "c"
+        will deduct a half a point, and the wrong answer deducts 2. You need
+        to be fast as the "c" will not wait for you! Your high score will be
+        stored while you are on the site, and your best score will be saved
+        in the database for you to beat when you come back in the future.
+        Have fun, and please browse around to learn more about me, and the
+        features of this site.</p>
+        
+    </div>
+    <div class="container">
+      <div class="row">
+        <form class="card" action="/contact" method="POST">
+          <fieldset class="card-body">
+            <legend>Contact Me</legend>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="name" class="form-control" id="name" name="name" placeholder="Jane Smith">
+          
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="jane@smith.com">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" class="form-control" id="subject" name="subject" placeholder="Would love to offer you a job!">
+          
+            </div>
+  
+            <div class="form-group">
+              <label for="textarea">Message</label>
+              <textarea class="form-control" name="textarea" id="textarea" rows="10"></textarea>
+            </div>
+            
+              <button class="btn btn-primary btn-lg" type="submit" role="button">Contact Me</button>
+            
+            </fieldset>
+            
+        </form>
+
       </div>
     </div>
-
-    
     </div>
   </div>
 </div>

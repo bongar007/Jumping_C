@@ -1,5 +1,3 @@
-new p5();
-
 let generatedGrid = [];
 let cnv;
 const readyElementEl = document.querySelector(".ready-element");
