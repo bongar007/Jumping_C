@@ -67,8 +67,23 @@ fieldset > legend,
   color: #1a1a1a;
 }
 
+.card {
+  background-color: rgba(36, 65, 92, 0.5);
+  border: none;
+}
+
+.card > p {
+  color: papayawhip;
+}
+
+legend {
+  font-size: 2.25rem;
+  margin-top: 1em;
+  padding-top: 0.5em;
+}
+
 #particles {
-  min-height: 100vh;
+  min-height: 200vh;
   padding: 0;
 }
 
@@ -76,7 +91,7 @@ fieldset > legend,
   position: absolute;
   background: rgba(55, 100, 144, 0.8);
   width: 100%;
-  height: 100vh;
+  height: 200vh;
 }
 
 .welcome-container {
