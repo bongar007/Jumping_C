@@ -53,6 +53,17 @@ const p5Instance = (p5) => {
     }
   }
 
+  function polygon(x, y, radius, npoints) {
+    let angle = p5.TWO_PI / npoints;
+    p5.beginShape();
+    for (let a = 0; a < TWO_PI; a += angle) {
+      let sx = x + p5.cos(a) * radius;
+      let sy = y + p5.sin(a) * radius;
+      p5.vertex(sx, sy);
+    }
+    p5.endShape(CLOSE);
+  }
+
   p5.setup = () => {
     p5.createCanvas(p5width, p5height);
 
@@ -64,6 +75,31 @@ const p5Instance = (p5) => {
 
   p5.draw = () => {
     p5.background(55, 100, 144);
+
+    polygon(
+      p5width * 0.73 - p5.mouseX / 50,
+      p5height * 0.58 - p5.mouseY / 50,
+      200,
+      6
+    );
+    polygon(
+      p5width * 0.5 - p5.mouseX / 50,
+      p5height * 0.2 - p5.mouseY / 50,
+      200,
+      6
+    );
+    polygon(
+      p5width * 0.73 - p5.mouseX / 50,
+      p5height * 0.33 - p5.mouseY / 50,
+      200,
+      6
+    );
+    polygon(
+      p5width * 0.5 - p5.mouseX / 50,
+      p5height * 0.45 - p5.mouseY / 50,
+      200,
+      6
+    );
 
     particles.forEach((particle, idx) => {
       particle.update();
