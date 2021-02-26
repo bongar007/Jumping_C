@@ -5,6 +5,7 @@ const gameOverEl = document.querySelector(".game-over-element");
 let score = 0;
 let highScore = 0;
 const bennyHill = new Audio("../assets/Benny-hill-theme.mp3");
+const beep = new Audio("../assets/beep.mp3");
 const currentScoreEl = document.querySelector(".current-score");
 const highScoreEl = document.querySelector(".high-score");
 highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
@@ -170,6 +171,7 @@ function changeText() {
   readyElementEl.textContent = texts[count];
   if (count < 3) {
     count++;
+    beep.play();
   } else {
     clearInterval(changeText);
   }
