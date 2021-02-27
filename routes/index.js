@@ -12,10 +12,18 @@ router.get("/game", ensureAuthenticated, (req, res) =>
     user: req.user,
   })
 );
-router.get("/welcome", (req, res) => res.render("welcome"));
+router.get("/welcome", (req, res) =>
+  res.render("welcome", {
+    user: req.user,
+  })
+);
 
 //Intro
-router.get("/intro", (req, res) => res.render("intro"));
+router.get("/intro", (req, res) =>
+  res.render("intro", {
+    user: req.user,
+  })
+);
 //About
 router.get("/about", (req, res) =>
   res.render("about", {

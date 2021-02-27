@@ -1,10 +1,10 @@
-<%- include('./partials/header') %> <%- include ("./partials/messages"); %>
+<%- include('./partials/header', {user:user}) %> <%- include ("./partials/messages"); %>
 <div id="particles" class="container-fluid">
   <div class="intro-container">
     
     <div class="col-md-10 jumbotron">
       <h1 class="display-3">Hello, and welcome</h1>
-      <%- include ("./partials/messages"); %>
+
       <p class="lead">This is my professional portfolio site to share what I have been working on, as well as a little bit about myself</p>
       <hr class="my-4">
       <p class="instruction"><span class="bigger">In this Node project, </span>
@@ -58,3 +58,4 @@
     </div>
   </div>
 </div>
+<script src="/js/features.js" defer></script>

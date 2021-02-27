@@ -220,11 +220,6 @@ main {
   display: none;
 }
 
-.welcome {
-  color: papayawhip;
-  font-size: inherit;
-}
-
 /* Login Page */
 
 .login-row {
@@ -283,6 +278,12 @@ legend {
 
 /* Game page */
 
+.welcome {
+  color: papayawhip;
+  font-size: inherit;
+  padding: 1em;
+}
+
 .ready-element,
 .game-over-element {
   margin-top: 1em;
@@ -303,9 +304,9 @@ legend {
   margin: auto;
 }
 
-.true-button {
+/* .true-button {
   margin: auto;
-}
+} */
 
 #canvas-container {
   height: 45em;

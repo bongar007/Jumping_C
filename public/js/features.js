@@ -1,6 +1,3 @@
-//Instantiating Rellax parallax library
-const rellax = new Rellax(".rellax");
-
 //P5JS Instance for background
 const p5Instance = (p5) => {
   const particles = [];
@@ -56,12 +53,12 @@ const p5Instance = (p5) => {
   function polygon(x, y, radius, npoints) {
     let angle = p5.TWO_PI / npoints;
     p5.beginShape();
-    for (let a = 0; a < TWO_PI; a += angle) {
+    for (let a = 0; a < p5.TWO_PI; a += angle) {
       let sx = x + p5.cos(a) * radius;
       let sy = y + p5.sin(a) * radius;
       p5.vertex(sx, sy);
     }
-    p5.endShape(CLOSE);
+    p5.endShape(p5.CLOSE);
   }
 
   p5.setup = () => {
