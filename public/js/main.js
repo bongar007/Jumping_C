@@ -1,6 +1,5 @@
 const navItem = document.querySelector(".nav-item");
 const btn = document.getElementById("button");
-console.log(btn);
 // function activeClassToggle() {
 // navItem.addEventListener("click", (e) => {
 //   let href = e.target.firstElementChild.getAttribute("href");
@@ -35,23 +34,4 @@ const observer = new IntersectionObserver(callback, options);
 
 sections.forEach((section, index) => {
   observer.observe(section);
-});
-// /////////Scroll to top arrow
-
-document?.body.addEventListener("scroll", function () {
-  if (document?.body?.scrollTop > 300) {
-    btn.classList.add("show");
-  } else {
-    btn.classList.remove("show");
-  }
-});
-
-btn?.addEventListener("click", function (e) {
-  e.preventDefault();
-
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
-  });
 });

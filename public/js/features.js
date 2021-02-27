@@ -90,7 +90,7 @@ const p5Instance = (p5) => {
     );
     polygon(
       p5width * 0.73 - p5.mouseX / 50,
-      p5height * 0.33 - p5.mouseY / 50,
+      p5height * 0.325 - p5.mouseY / 50,
       200,
       6
     );
