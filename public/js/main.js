@@ -12,10 +12,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   const navLinks = document.querySelectorAll(".nav-link");
   let path = location.pathname;
-  console.log(path);
+
   function activeClassToggle() {
     navLinks.forEach((item) => {
-      console.log(item.getAttribute("href"));
       if (item.getAttribute("href") == path) {
         item.classList.add("active");
       }
@@ -23,8 +22,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   activeClassToggle();
-
-  // // activeClassToggle(); ////////////////////////////NEEDS WORK
 
   // / Creating scrolling effect on Features Page
   const sections = [...document.querySelectorAll("section")];
