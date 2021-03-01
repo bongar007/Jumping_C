@@ -207,7 +207,7 @@ main {
   min-height: calc(100vh - 17em);
 }
 
-.show {
+.showEl {
   position: absolute;
   display: block;
   margin-left: auto;

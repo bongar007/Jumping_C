@@ -160,7 +160,7 @@ function timer(el, data) {
       let storedHighScore = Number(sessionStorage.getItem("current_high"));
       highScoreEl.textContent = storedHighScore;
       gameOverEl.classList.remove("hide");
-      gameOverEl.classList.add("show");
+      gameOverEl.classList.add("showEl");
     }
   }, 1000);
 }
@@ -187,7 +187,7 @@ function setup() {
   setTimeout(() => {
     frameRate(0.5),
       timer(readyElementEl),
-      readyElementEl.classList.remove("show"),
+      readyElementEl.classList.remove("showEl"),
       readyElementEl.classList.add("hide");
   }, 5000);
   cnv.mouseClicked(locateC);
