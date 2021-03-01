@@ -45,4 +45,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
   sections.forEach((section, index) => {
     observer.observe(section);
   });
+
+  //fuction to handle toTop arrow
+  const btn = [...document.getElementsByClassName("toTop")];
+  btn.forEach((element) => {
+    window.addEventListener("scroll", (e) => {
+      if (window.scrollY > 200) {
+        element.style.opacity = 1;
+      } else {
+        element.style.opacity = 0;
+      }
+    });
+
+    element.addEventListener("click", () => {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    });
+  });
 });
