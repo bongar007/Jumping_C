@@ -35,6 +35,5 @@
     "passport-local": "^1.0.0",
     "rand-token": "^1.0.1",
     "rellax": "^1.12.1"
-  },
-  "devDependencies": {}
+  }
 }
