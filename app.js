@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const bodyParser = require("body-parser");
 const nodeMailer = require("nodemailer");
 
@@ -45,11 +46,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Express session
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false, // don't create session until something stored
+    resave: false, //don't save session if unmodified
+    store: MongoStore.create({
+      mongoUrl: process.env.DATABASE_URL,
+      touchAfter: 24 * 3600, // time period in seconds
+    }),
   })
 );
 
