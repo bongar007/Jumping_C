@@ -15,8 +15,9 @@ const getQuestionsApi = async () => {
   data = await response.json();
 
   let question = unescape(data.results[random].question);
+
   console.log(question);
-  questionEl.textContent = question;
+  questionEl.innerHTML = question; //Use innerHTML to "decode" the text coming from API. TextContent will insert the escaped characters
   answerClickEvent(data);
 };
 
