@@ -1,6 +1,6 @@
-// if (process.env.NODE_ENV !== "production") {
-//   require("dotenv").config();
-// }
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
@@ -27,15 +27,12 @@ require("./config/passport")(passport);
 const db = mongoose.connection;
 
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://testUser:C4gaOqX196WqkRZk@cluster0.3jz3j.mongodb.net/test?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("MongoDb Connected"));
@@ -49,22 +46,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Express session
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
 
 app.use(
   session({
-    secret: "JavaScript is pretty awesome",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false, // don't create session until something stored
     resave: false, //don't save session if unmodified
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://testUser:C4gaOqX196WqkRZk@cluster0.3jz3j.mongodb.net/test?retryWrites=true&w=majority",
+      mongoUrl: process.env.DATABASE_URL,
       touchAfter: 24 * 3600, // time period in seconds
     }),
   })

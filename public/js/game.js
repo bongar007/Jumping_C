@@ -11,13 +11,13 @@ const highScoreEl = document.querySelector(".high-score");
 highScoreEl.textContent = Number(sessionStorage.getItem("current_high"));
 const bestScoreEl = document.querySelector(".best-score");
 const canvasContainerEl = document.getElementById("canvas-container");
-const answerButtonsContainerEl = document.querySelector(
-  ".answer-buttons-container"
-);
+const scoresContainerEl = document.querySelector(".scores-container");
 const restartEl = document.querySelector(".restart");
 const canvasSize = 500;
 const nav = document.querySelector("nav");
-// const startButton = document.querySelector(".button-row > .start-button");
+const answerButtonsContainerEl = document.querySelector(
+  ".answer-buttons-container"
+);
 
 // Adding logic to "Restart" button to keep the current high score and restart game
 restartEl.addEventListener("click", function () {
@@ -87,8 +87,17 @@ function drawZeros(grid) {
         createZero(x, y);
       } else {
         stroke(255);
-        fill(255);
-        ellipse(x * tileSize + 10, y * tileSize + 10, 12, 16);
+        strokeWeight(3);
+        noFill();
+        arc(
+          x * tileSize + 10,
+          y * tileSize + 10,
+          12,
+          16,
+          70,
+          TWO_PI - QUARTER_PI,
+          OPEN
+        );
       }
     });
   });
@@ -100,6 +109,8 @@ function timer(el, data) {
   //Calling to Trivia API and activating the answer buttons
   getQuestionsApi();
   bennyHill.play();
+  scoresContainerEl.classList.remove("hide");
+  scoresContainerEl.classList.add("show");
 
   //Setting up count down with progress bar
   let current_progress = 0;
@@ -155,12 +166,13 @@ function timer(el, data) {
 
       noLoop();
       cnv.addClass("hide");
-      questionContainer.classList.add("hide");
-      answerButtonsContainerEl.classList.add("hide");
+
       let storedHighScore = Number(sessionStorage.getItem("current_high"));
       highScoreEl.textContent = storedHighScore;
       gameOverEl.classList.remove("hide");
       gameOverEl.classList.add("showEl");
+      // trueButton.removeEventListener("click", trueBtn(), true);
+      // falseButton.removeEventListener("click", falseBtn(), true);
     }
   }, 1000);
 }

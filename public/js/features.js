@@ -56,7 +56,8 @@ const p5Instance = (p5) => {
     for (let a = 0; a < p5.TWO_PI; a += angle) {
       let sx = x + p5.cos(a) * radius;
       let sy = y + p5.sin(a) * radius;
-      p5.vertex(sx, sy);
+      p5.curveTightness(0.7);
+      p5.curveVertex(sx, sy);
     }
     p5.endShape(p5.CLOSE);
   }

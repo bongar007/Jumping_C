@@ -316,8 +316,20 @@ legend {
 .scores-container {
   margin-top: 2em;
 }
+
+.game-header {
+  margin-top: 1em;
+}
+
+.game-header > ul > div {
+  float: right;
+}
+
+.game-card-header {
+  color: #ffefd5;
+}
+
 .scores {
-  float: left;
   text-align: center;
 }
 
@@ -338,6 +350,7 @@ legend {
 }
 
 .question {
+  font-weight: 600;
   text-align: center;
   color: papayawhip;
   font-size: 1.25rem;

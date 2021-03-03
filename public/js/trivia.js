@@ -36,21 +36,25 @@ function answerClickEvent(obj) {
     currentScoreEl.textContent = currentScore;
   }
 
-  trueButton.addEventListener("click", () => {
+  function trueBtn() {
     if (correctAnswer === "True") {
       rightAnswer();
     } else {
       wrongAnswer();
     }
     getQuestionsApi();
-  });
+  }
 
-  falseButton.addEventListener("click", () => {
+  trueButton.addEventListener("click", trueBtn, true);
+
+  function falseBtn() {
     if (correctAnswer === "False") {
       rightAnswer();
     } else {
       wrongAnswer();
     }
     getQuestionsApi();
-  });
+  }
+
+  falseButton.addEventListener("click", falseBtn, true);
 }
