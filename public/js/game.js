@@ -18,6 +18,8 @@ const nav = document.querySelector("nav");
 const answerButtonsContainerEl = document.querySelector(
   ".answer-buttons-container"
 );
+const questionHeader = document.querySelector(".question-header");
+const resultsEl = document.querySelector(".results");
 
 // Adding logic to "Restart" button to keep the current high score and restart game
 restartEl.addEventListener("click", function () {
@@ -171,8 +173,16 @@ function timer(el, data) {
       highScoreEl.textContent = storedHighScore;
       gameOverEl.classList.remove("hide");
       gameOverEl.classList.add("showEl");
-      // trueButton.removeEventListener("click", trueBtn(), true);
-      // falseButton.removeEventListener("click", falseBtn(), true);
+      questionHeader.textContent = "Results:";
+      answerButtonsContainerEl.classList.add("hide");
+      questionEl.classList.add("hide");
+      resultsEl.classList.remove("hide");
+      correctAnswerEl.textContent = correct;
+      incorrectAnswerEl.textContent = incorrect;
+      console.log(answerCount, correct);
+      resultsPercentEl.textContent = `${Math.floor(
+        (correct / answerCount) * 100
+      )}% correct`;
     }
   }, 1000);
 }

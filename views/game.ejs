@@ -29,8 +29,8 @@
     <div class="col-sm-4 card mb-3 scores-container hide">
       <h3 class="card-header game-card-header">Game Scores <i class="fas fa-chart-line"></i></h3>
       <div class="card-body" style="padding-bottom: 0;">
-        <h5 class="card-title" style="color: #FFDCA2;">Answer the questions below</h5>
-        <h6 class="card-subtitle text-muted" style="color: #FFDCA2;">And see your scores</h6>
+        <h5 class="card-title" style="color: #FFDCA2;">Welcome <br><%- user.name %></h5>
+        <h6 class="card-subtitle text-muted" style="color: #FFDCA2;">Answer the questions below and check your scores</h6>
       </div>
       
       <div class="card-body">
@@ -38,6 +38,13 @@
           
             <h3 class="question-header">Question:</h3><br>
             <p class="question"></p>
+
+            <ul class="list-group list-group-flush results hide">
+              <li class="list-group-item">Correct Answers:
+                <span class="correct-answers">6</span></li>
+              <li class="list-group-item">Wrong Answers: <span class="incorrect-answers">3</span></li>
+              <li class="list-group-item">Percentage: <span class="results-percent">...%</span></li>
+            </ul>
 
           </p>
             <div class="row offset-md-1 answer-buttons-container mt-1">
