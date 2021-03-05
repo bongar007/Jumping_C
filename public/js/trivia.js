@@ -21,7 +21,6 @@ const getQuestionsApi = async () => {
       "https://opentdb.com/api.php?amount=1&type=boolean"
     );
     data = await response.json();
-    console.log(data); /////shows different data every time i invoke getQuestionApi on click
     let question = data.results[0].question;
     questionEl.innerHTML = question; //Use innerHTML to "decode" the text coming from API. TextContent will insert the escaped characters
     return data;
@@ -30,8 +29,7 @@ const getQuestionsApi = async () => {
   }
 };
 getQuestionsApi().then((data) => {
-  /////Handling the promise, but Will NOT update anything after i invoke getQuestionsApi on button click
-  console.log(data); ////shows the first object pulled only
+  /////passing data to the click event handler function
   answerClickEvent(data);
 });
 

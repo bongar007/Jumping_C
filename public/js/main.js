@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   }
 
+  ///Function to Handle menu items active class depending on location
   const navLinks = document.querySelectorAll(".nav-link");
   let path = location.pathname;
 

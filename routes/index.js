@@ -4,7 +4,9 @@ const nodemailer = require("nodemailer");
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 
 // Welcome Page
-router.get("/", forwardAuthenticated, (req, res) => res.render("intro"));
+router.get("/", forwardAuthenticated, (req, res) =>
+  res.render("intro", { user: req.user })
+);
 
 // Game
 router.get("/game", ensureAuthenticated, (req, res) =>
@@ -12,26 +14,32 @@ router.get("/game", ensureAuthenticated, (req, res) =>
     user: req.user,
   })
 );
-router.get("/welcome", (req, res) =>
+router.get("/welcome", forwardAuthenticated, (req, res) =>
   res.render("welcome", {
     user: req.user,
   })
 );
 
 //Intro
-router.get("/intro", (req, res) =>
+router.get("/intro", forwardAuthenticated, (req, res) =>
   res.render("intro", {
     user: req.user,
   })
 );
 //About
-router.get("/about", (req, res) =>
+router.get("/about", forwardAuthenticated, (req, res) =>
   res.render("about", {
     user: req.user,
   })
 );
+
+router.get("/download", function (req, res) {
+  const file = `./public/assets/img/resume.doc`;
+  res.download(file); // Set disposition and send it.
+});
+
 //Features
-router.get("/features", (req, res) =>
+router.get("/features", forwardAuthenticated, (req, res) =>
   res.render("features", {
     user: req.user,
   })
@@ -39,28 +47,23 @@ router.get("/features", (req, res) =>
 
 //Contact Me form
 
-router.post("/contact", (req, res) => {
+router.post("/contact", forwardAuthenticated, (req, res) => {
   async function main() {
     let transporter = nodemailer.createTransport({
       service: "Gmail",
-      port: 587,
-      secure: false,
       auth: {
         user: process.env.GMAIL_EMAIL,
         pass: process.env.GMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
       },
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
       name: req.body.name,
-      from: req.body.email,
-      to: "bongar007@gmail.com",
+      from: `Email from Portfolio`,
+      to: "attila.bongar@gmail.com",
       subject: req.body.subject,
-      text: req.body.textarea,
+      text: `${req.body.name} from ${req.body.email} says: ${req.body.textarea}`,
     });
 
     req.flash("success_msg", "Thank you for contacting me!");
