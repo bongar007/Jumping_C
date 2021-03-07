@@ -222,7 +222,9 @@ main {
 
 /* Login Page */
 
-.login-row {
+.login-row,
+.register-row,
+.welcome-row {
   margin-left: 0;
   margin-right: 0;
 }
@@ -286,7 +288,7 @@ legend {
 
 .ready-element,
 .game-over-element {
-  margin-top: 1em;
+  margin-top: 3em;
 }
 
 .instruction {
@@ -385,9 +387,21 @@ legend {
 .bio-container,
 .coming-from-container {
   margin-bottom: 10em;
+  background-color: #325b82;
+  padding: 2em;
 }
+
+.going-to-container {
+  background-color: #325b82;
+  padding: 2em;
+}
+
 .bio-container {
   margin-top: 5em;
+}
+
+.coming-from-article {
+  text-align: right;
 }
 
 .bio,
@@ -402,6 +416,10 @@ legend {
 }
 .bigger {
   font-size: 1.5rem;
+  color: papayawhip;
+}
+
+.bio > a {
   color: papayawhip;
 }
 
@@ -452,8 +470,15 @@ section h1 {
   transition: opacity 2000ms;
 }
 
-section .row {
-  padding: 0;
+.feature2,
+.feature4 {
+  text-align: right;
+}
+
+.feature1,
+.feature2,
+.feature3,
+.feature4 {
   margin-left: 0;
   margin-right: 0;
 }
@@ -473,6 +498,55 @@ section.is-visible h1 {
   color: black;
 }
 
+.features-contact-me {
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  position: relative;
+  bottom: 30em;
+  left: 19em;
+  width: 19em;
+  height: 10em;
+  background-color: #a6a385;
+  background-size: cover;
+  clip-path: polygon(
+    0% 20%,
+    60% 20%,
+    100% 20%,
+    100% 50%,
+    100% 80%,
+    60% 80%,
+    0% 80%
+  );
+}
+
+.features-contact-me > a {
+  font-size: x-large;
+  margin-top: 1.3em;
+}
+
+.features-contact-me:hover {
+  animation: clips 1s ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes clips {
+  100% {
+    clip-path: polygon(
+      0% 20%,
+      60% 20%,
+      60% 0%,
+      100% 50%,
+      60% 100%,
+      60% 80%,
+      0% 80%
+    );
+  }
+}
+
+/* Arrow to morph */
+
 /* Canvas CSS */
 #defaultCanvas {
   width: 100%;
@@ -482,13 +556,12 @@ section.is-visible h1 {
 
 .footer-wrapper {
   /* overflow: hidden; */
-  height: 15em;
-
   background: #262626;
   color: #627482 !important;
   margin-bottom: 0;
   padding-bottom: 0;
   width: 100%;
+  position: absolute;
 }
 
 footer {
@@ -520,9 +593,19 @@ small {
 .social {
   font-size: 21px !important;
 }
+.social > a > span > i {
+  color: papayawhip;
+}
 
 .rights {
   font-size: calc(
     10px + (12 - 10) * ((100vw - 360px) / (1600 - 360))
   ) !important;
+}
+
+.list-unstyled > a {
+  color: #989c9e;
+}
+.list-unstyled > .nav-link {
+  padding: 0.2rem 1rem;
 }

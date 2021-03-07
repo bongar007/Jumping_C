@@ -1,3 +1,5 @@
+// const p5 = require("p5");
+
 //P5JS Instance for background
 const p5Instance = (p5) => {
   const particles = [];

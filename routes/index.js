@@ -4,9 +4,7 @@ const nodemailer = require("nodemailer");
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 
 // Welcome Page
-router.get("/", forwardAuthenticated, (req, res) =>
-  res.render("intro", { user: req.user })
-);
+router.get("/", (req, res) => res.render("intro", { user: req.user }));
 
 // Game
 router.get("/game", ensureAuthenticated, (req, res) =>
@@ -14,20 +12,20 @@ router.get("/game", ensureAuthenticated, (req, res) =>
     user: req.user,
   })
 );
-router.get("/welcome", forwardAuthenticated, (req, res) =>
+router.get("/welcome", (req, res) =>
   res.render("welcome", {
     user: req.user,
   })
 );
 
 //Intro
-router.get("/intro", forwardAuthenticated, (req, res) =>
+router.get("/intro", (req, res) =>
   res.render("intro", {
     user: req.user,
   })
 );
 //About
-router.get("/about", forwardAuthenticated, (req, res) =>
+router.get("/about", (req, res) =>
   res.render("about", {
     user: req.user,
   })
@@ -39,7 +37,7 @@ router.get("/download", function (req, res) {
 });
 
 //Features
-router.get("/features", forwardAuthenticated, (req, res) =>
+router.get("/features", (req, res) =>
   res.render("features", {
     user: req.user,
   })
@@ -47,17 +45,19 @@ router.get("/features", forwardAuthenticated, (req, res) =>
 
 //Contact Me form
 
-router.post("/contact", forwardAuthenticated, (req, res) => {
+router.post("/contact", (req, res) => {
   async function main() {
     let transporter = nodemailer.createTransport({
       service: "Gmail",
+      port: 465,
+      secure: false, // use SSL
       auth: {
         user: process.env.GMAIL_EMAIL,
         pass: process.env.GMAIL_PASS,
       },
+      tls: { rejectUnauthorized: false },
     });
 
-    // send mail with defined transport object
     let info = await transporter.sendMail({
       name: req.body.name,
       from: `Email from Portfolio`,

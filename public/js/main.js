@@ -1,15 +1,15 @@
 //Instantiating Rellax parallax library
 window.addEventListener("DOMContentLoaded", (event) => {
-  function initRellax() {
-    if (document.getElementsByClassName("rellax").length > 0) {
-      if (window.Rellax) {
-        const rellax = new Rellax(".rellax");
-      } else {
-        setTimeout(initRellax, 100);
-      }
-    }
-  }
+  // function initRellax() {
+  //   if (document.getElementsByClassName("rellax").length > 0) {
+  //     if (window.Rellax) {
+  //     } else {
+  //       setTimeout(initRellax, 100);
+  //     }
+  //   }
+  // }
 
+  const rellax = new Rellax(".rellax");
   ///Function to Handle menu items active class depending on location
   const navLinks = document.querySelectorAll(".nav-link");
   let path = location.pathname;

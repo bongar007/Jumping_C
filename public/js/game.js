@@ -31,7 +31,7 @@ restartEl.addEventListener("click", function () {
 //Centering the canvas in the parent container which was set to position:relative to achieve that
 function centerCanvas(cnv) {
   let x = (canvasContainerEl.offsetWidth - canvasSize) / 2;
-  let y = canvasContainerEl.offsetHeight - canvasSize;
+  let y = canvasContainerEl.offsetHeight - canvasSize - 60;
   console.log(x, y);
   cnv.position(x, y);
 }
@@ -119,16 +119,16 @@ function timer(el, data) {
   const downloadTimer = setInterval(function () {
     current_progress++;
     const progressBar = document.getElementById("dynamic");
-    progressBar.style.width = `${current_progress * 10}%`;
+    progressBar.style.width = `${current_progress * 1.66666667}%`;
     progressBar.setAttribute("aria-valuenow", current_progress);
-    progressBar.textContent = `${10 - current_progress}`;
+    progressBar.textContent = `${60 - current_progress}`;
 
     currentScoreEl.addEventListener("change", () =>
       sessionStorage.setItem("current_high", Number(currentScoreEl.textContent))
     );
 
     //Once time runs out:
-    if (current_progress >= 10) {
+    if (current_progress >= 60) {
       clearInterval(downloadTimer);
       bennyHill.pause();
       // Setting up for sending higScore to DB
