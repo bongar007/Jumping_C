@@ -10,6 +10,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const bodyParser = require("body-parser");
 const nodeMailer = require("nodemailer");
+const Models = require("/models/User");
 
 const app = express();
 
