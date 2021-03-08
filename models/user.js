@@ -40,7 +40,7 @@ UserSchema.methods.generateToken = function () {
   // });
 };
 
-const User = mongoose.model("User", UserSchema);
-const Token = mongoose.model("Token", TokenSchema);
-const Models = { User: User, Token: Token };
-module.exports = Models;
+const User = mongoose.model("User", UserSchema); ///UPPER CASE EXPORT!!!!!!
+// const Token = mongoose.model("Token", TokenSchema);
+// const Models = { User: User, Token: Token };
+module.exports = User;

@@ -3,8 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 // Load User model
-const User = require("../models/User").User;
-const generateToken = require("../models/User").generateToken;
+const User = require("../models/user"); //LOWER CASE IMPORT!!!!!!!!!!!!
+// const generateToken = require("../models/User").generateToken;
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
