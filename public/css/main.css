@@ -498,6 +498,8 @@ section.is-visible h1 {
   color: black;
 }
 
+/* Arrow to morph */
+
 .features-contact-me {
   text-align: center;
   padding: 10px;
@@ -545,8 +547,6 @@ section.is-visible h1 {
     background-color: #8e714e;
   }
 }
-
-/* Arrow to morph */
 
 /* Canvas CSS */
 #defaultCanvas {
