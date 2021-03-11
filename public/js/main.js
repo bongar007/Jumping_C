@@ -9,7 +9,77 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //   }
   // }
 
-  const rellax = new Rellax(".rellax");
+  const rellax = new Rellax(".rellax", {
+    breakpoints: [1201, 1402, 1803],
+  });
+
+  //Making sure mobile size does not display Game tab in Nav
+
+  //   const setNavInnerHTML = (html) => {
+  //     const nav = document.querySelector(".navbar-nav");
+  //     nav.innerHTML = html;
+  //   };
+
+  //   const Component1 = `
+  //       <li class="nav-item">
+  //         <a class="nav-link" href="/game"
+  //           >Game
+  //           <span class="sr-only">(current)</span>
+  //         </a>
+  //       </li>
+  //       <li class="nav-item">
+  //         <a class="nav-link" href="/features">Features</a>
+  //       </li>
+
+  //       <li class="nav-item">
+  //         <a class="nav-link" href="/about">About</a>
+  //       </li>
+  //       <li class="nav-item offset-lg-10 login logout">
+  //         <% if (typeof user !== 'undefined' && user) { %>
+  //         <a href="/users/logout" class="nav-link">Logout</a>
+  //         <% } else { %>
+  //         <a href="/users/login" class="nav-link">login</a>
+  //         <% } %>
+  //       </li>
+  // `;
+
+  //   const Component2 = `
+  //   <li class="nav-item">
+  //         <a class="nav-link" href="/features">Features</a>
+  //       </li>
+
+  //       <li class="nav-item">
+  //         <a class="nav-link" href="/about">About</a>
+  //       </li>
+  //       <li class="nav-item offset-lg-10 login logout">
+  //         <% if (typeof user !== 'undefined' && user) { %>
+  //         <a href="/users/logout" class="nav-link">Logout</a>
+  //         <% } else { %>
+  //         <a href="/users/login" class="nav-link">login</a>
+  //         <% } %>
+  //       </li>
+  // `;
+
+  //   const mql = window.matchMedia("(max-width: 600px)");
+
+  //   // For first render
+  //   let mobileView = mql.matches;
+  //   if (mobileView) {
+  //     setNavInnerHTML(Component2);
+  //   } else {
+  //     setNavInnerHTML(Component1);
+  //   }
+
+  //   // For subsequent renders if screen size changes
+  //   mql.addEventListener("change", (e) => {
+  //     let mobileView = e.matches;
+  //     if (mobileView) {
+  //       setNavInnerHTML(Component2);
+  //     } else {
+  //       setNavInnerHTML(Component1);
+  //     }
+  //   });
+
   ///Function to Handle menu items active class depending on location
   const navLinks = document.querySelectorAll(".nav-link");
   let path = location.pathname;

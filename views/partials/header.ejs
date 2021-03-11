@@ -15,17 +15,17 @@
   <div class="collapse navbar-collapse" id="navbarColor03">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/game"
-          >Game
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/features">Features</a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item game-nav-item">
+        <a class="nav-link" href="/game"
+          >Game
+          <span class="sr-only">(current)</span>
+        </a>
       </li>
       <li class="nav-item offset-lg-10 login logout">
         <% if (typeof user !== 'undefined' && user) { %>

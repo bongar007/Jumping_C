@@ -69,6 +69,7 @@ app.use(flash());
 
 // Global variables
 app.use(function (req, res, next) {
+  res.locals.mobileView = true;
   res.locals.url = req.originalUrl;
   res.locals.user = req.user;
   res.locals.success_msg = req.flash("success_msg");

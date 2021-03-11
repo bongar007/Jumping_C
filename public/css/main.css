@@ -610,3 +610,18 @@ small {
 .list-unstyled > .nav-link {
   padding: 0.2rem 1rem;
 }
+
+/* MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .game-nav-item {
+    display: none;
+  }
+}
+
+@media (max-width: 772px) {
+  .coming-from-picture,
+  .going-to-picture,
+  .profile-picture {
+    height: 350px;
+  }
+}
