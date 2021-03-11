@@ -461,7 +461,7 @@ legend {
 }
 
 section {
-  height: 100vh;
+  height: 65vh;
   padding: 6rem;
 }
 
@@ -623,5 +623,31 @@ small {
   .going-to-picture,
   .profile-picture {
     height: 350px;
+    margin-top: 1em;
+  }
+
+  .bio-container,
+  .coming-from-container,
+  .going-to-container {
+    background-color: rgb(55, 100, 144);
+  }
+  .bio-title,
+  .coming-from-title,
+  .going-to-title {
+    font-size: 4.5rem;
+  }
+  section {
+    padding: 1rem;
+    height: 100vh;
+  }
+  .node-picture,
+  .express-picture,
+  .mongo-picture {
+    display: none;
+  }
+
+  .features-contact-me {
+    bottom: 20em;
+    left: 4em;
   }
 }
