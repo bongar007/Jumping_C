@@ -35,22 +35,22 @@ getQuestionsApi().then((data) => {
 
 function answerClickEvent(obj) {
   let correctAnswer = obj.results[0].correct_answer;
-  let currentScore = Number(currentScoreEl.textContent);
+  // let currentScore = Number(currentScoreEl.textContent);
 
   console.log(correctAnswer);
 
   function rightAnswer() {
     rightAnswerAudio.play();
-    currentScore = currentScore + 2;
+    score = score + 2;
     correct++;
-    currentScoreEl.textContent = currentScore;
+    currentScoreEl.textContent = score;
     return correct;
   }
   function wrongAnswer() {
     wrongAnswerAudio.play();
-    currentScore = currentScore - 2;
+    score = score - 2;
     incorrect++;
-    currentScoreEl.textContent = currentScore;
+    currentScoreEl.textContent = score;
     return incorrect;
   }
 
